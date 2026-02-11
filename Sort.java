@@ -50,7 +50,7 @@ public class StudentChoices {
 }
 
 public class LoadingAndAssignments {
-	public static void main(String[] args) {
+	public static void main(String[] args)throws IOException{
 		
 		//need to change magic number
 		Student[] studentArray = new Student[100];
@@ -64,30 +64,29 @@ public class LoadingAndAssignments {
 		//number of choices per student
 		int numChoices = 5;
 		
-		public void readFile() throws IOException {
-			File myFile = new File(filename);
-			Scanner scan = new Scanner(myFile);
-			int i = 0;
+		File myFile = new File(filename);
+		Scanner scan = new Scanner(myFile);
+		int i = 0;
 		
-			if (scan.hasNextLine()) {
-				scan.nextLine();
-			}
+		if (scan.hasNextLine()) {
+			scan.nextLine();
+		}
 
-			//read through each student file
-			while (scan.hasNextLine()) {
-				String line = scan.nextLine();
-				String[] data = line.split(",");
-				String time = data[0];
-				String username = data[2];
-				int choice1 = data[10];
-				int choice2 = data[11];
-				int choice3 = data[12];
-				int choice4 = data[13];
-				int choice5 = data[14];
-				studentArrray[i] = new Student(time, username, choice1, choice2, choice3, choice4, choice5);
-				i++;
-			}
-			scan.close();
+		//read through each student file
+		while (scan.hasNextLine()) {
+			String line = scan.nextLine();
+			String[] data = line.split(",");
+			String time = data[0];
+			String username = data[2];
+			int choice1 = data[10];
+			int choice2 = data[11];
+			int choice3 = data[12];
+			int choice4 = data[13];
+			int choice5 = data[14];
+			studentArrray[i] = new Student(time, username, choice1, choice2, choice3, choice4, choice5);
+			i++;
+		}
+		scan.close();
 		
 			ArrayList<String> student = new ArrayList<String>();
 			int totalStudent = 0;
@@ -102,7 +101,7 @@ public class LoadingAndAssignments {
 	}
 	
 	//separate place to keep track of instructors, their sessions, classrooms, timeslots
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		//classrooms
 		int numClassrooms = 5;
 		//timslots
@@ -116,7 +115,6 @@ public class LoadingAndAssignments {
 		//counter for loops
 		int count = 0;
 		
-		public void readFile() throws IOException {
 			File myFile = new File(filename);
 			Scanner scan = new Scanner(myFile);
 			int i = 0;
