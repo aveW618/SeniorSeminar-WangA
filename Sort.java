@@ -88,7 +88,6 @@ public class LoadingAndAssignments {
 				i++;
 			}
 			scan.close();
-		}
 		
 			ArrayList<String> student = new ArrayList<String>();
 			int totalStudent = 0;
@@ -111,7 +110,7 @@ public class LoadingAndAssignments {
 		int sessions;
 		
 		//need to change magic number
-		Instructor[] instructorArray = new Instructor[100]
+		Instructor[] instructorArray = new Instructor[100];
 		String filename = "Senior Seminar Data.csv";
 		
 		//counter for loops
@@ -136,7 +135,6 @@ public class LoadingAndAssignments {
 				i++;
 			}
 			scan.close();
-		}
 		
 			ArrayList<String> instructor = new ArrayList<String>();
 			String instructorInfo = " ";
@@ -144,9 +142,7 @@ public class LoadingAndAssignments {
 				instructorInfo = instructorInfo + instructor(i);
 			}
 		}
-	
-		
-}
+	}
 	
 	
 		
