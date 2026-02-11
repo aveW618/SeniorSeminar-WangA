@@ -3,26 +3,72 @@
 
 import java.io.*;
 import java.util.*; 
+		
+public class StudentChoices {
+	//5 choices ofr each student
+	int choice1;
+	int choice2;
+	int choice3;
+	int choice4;
+	int choice5;
+	
+	//constructor 
+	public StudentChoices (int c1, int c2, int c3, int c4, int c5) {
+		choice1 = c1;
+		choice2 = c2;
+		choice3 = c3;
+		choice4 = c4;
+		choice5 = c5;
+	}
+	
+	//getters
+	public int getChoice1() {
+		return choice1;
+	}
+	public int getChoice2() {
+		return choice2;
+	}
+	public int getChoice3() {
+		return choice3;
+	}
+	public int getChoice4() {
+		return choice4;
+	}
+	public int getChoice5() {
+		return choice5;
+	}
+	
+	//toString method
+	public String toString() {
+		return (choice1 + " " + choice2 + " " + choice3 + " " + choice4 + " " + choice5);
+	}
+}
 
 public class LoadingAndAssignments {
 	public static void main(String[] args) {
 		//stored CSV file with student data
 		String filename = "Senior Seminar Data.csv";
 		
-		//each student attends/picks 5 sessions
-		int numChoices = 5;
 		//number of available sessions
 		int numSessions = 16;
+		//counter for loops
+		int count = 0;
+		
+		public void readFile() throws IOException {
+			File myFile = new File(filename);
+			Scanner scan = new Scanner(myFile);
+		
+		if (scan.hasNextLine()) {
+			scan.nextLine();
+		}
 		
 		//load the data into a 2D array
 		int [][] choiceArray = loadChoiceArray(filename, numChoices);
 		
 		//1D array to count how many times each session appears
 		int[] tallies = tallySessions(choiceArray, numSessions);
-		
 	
-		
-		
+	
 		
 		
 		
