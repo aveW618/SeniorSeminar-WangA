@@ -57,11 +57,20 @@ public class LoadingAndAssignments {
 		public void readFile() throws IOException {
 			File myFile = new File(filename);
 			Scanner scan = new Scanner(myFile);
+			int i = 0;
 		
-		if (scan.hasNextLine()) {
-			scan.nextLine();
-		}
+			if (scan.hasNextLine()) {
+				scan.nextLine();
+			}
 		
+			//read through each student file
+			while (scan.hasNextLine()) {
+				String line = scan.nextLine();
+				String[] data = line.split(",");
+				i++;
+			}
+		scan.close();
+	}
 		//load the data into a 2D array
 		int [][] choiceArray = loadChoiceArray(filename, numChoices);
 		
