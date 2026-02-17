@@ -13,10 +13,6 @@ public class StudentChoices {
 	private int choice4;
 	private int choice5;
 	
-	private String instructor;
-	private String username;
-	private String time;
-	
 	//constructor 
 	public StudentChoices (int c1, int c2, int c3, int c4, int c5) {
 		choice1 = c1;
@@ -52,8 +48,7 @@ public class StudentChoices {
 public class LoadingAndAssignments {
 	public static void main(String[] args)throws IOException{
 		
-		//need to change magic number
-		Student[] studentArray = new Student[100];
+		ArrayList<String> studentArray = new ArrayList<String>();
 		//stored CSV file with student data
 		String filename = "Senior Seminar Data.csv";
 		
@@ -76,19 +71,19 @@ public class LoadingAndAssignments {
 		while (scan.hasNextLine()) {
 			String line = scan.nextLine();
 			String[] data = line.split(",");
-			String time = data[0];
-			String username = data[2];
-			int choice1 = data[10];
-			int choice2 = data[11];
-			int choice3 = data[12];
-			int choice4 = data[13];
-			int choice5 = data[14];
-			studentArrray[i] = new Student(time, username, choice1, choice2, choice3, choice4, choice5);
+			ArrayList<String> student = new ArrayList<String>();
+			student.add(data[0]);
+			student.add(data[2]);
+			student.add(data[10]);
+			student.add(data[11]);
+			student.add(data[12]);
+			student.add(data[13]);
+			student.add(data[14]);
 			i++;
 		}
 		scan.close();
 		
-			ArrayList<String> student = new ArrayList<String>();
+
 			int totalStudent = 0;
 			for (int i = 0; i <= data.length; i++) {
 				totalStudent = totalStudent + student(i);
@@ -100,47 +95,6 @@ public class LoadingAndAssignments {
 		int[] tallies = tallySessions(choiceArray, numSessions);
 	}
 	
-	//separate place to keep track of instructors, their sessions, classrooms, timeslots
-	public static void main(String[] args) throws IOException {
-		//classrooms
-		int numClassrooms = 5;
-		//timslots
-		int [] timeSlots = {830, 930, 1030, 1230, 130};
-		int sessions;
-		
-		//need to change magic number
-		Instructor[] instructorArray = new Instructor[100];
-		String filename = "Senior Seminar Data.csv";
-		
-		//counter for loops
-		int count = 0;
-		
-			File myFile = new File(filename);
-			Scanner scan = new Scanner(myFile);
-			int i = 0;
-		
-			if (scan.hasNextLine()) {
-				scan.nextLine();
-			}
-
-			//read through each student file
-			while (scan.hasNextLine()) {
-				String line = scan.nextLine();
-				String[] data = line.split(",");
-				int sessionID = data[17];
-				String presenter = data[18];
-				instructorArray[i] = new Instructor(sessionID, presenter);
-				i++;
-			}
-			scan.close();
-		
-			ArrayList<String> instructor = new ArrayList<String>();
-			String instructorInfo = " ";
-			for (int i = 0; i <= data.length; i++) {
-				instructorInfo = instructorInfo + instructor(i);
-			}
-		}
-	}
 	
 	
 		
