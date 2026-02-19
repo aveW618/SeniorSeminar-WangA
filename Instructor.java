@@ -4,7 +4,7 @@ import java.util.*;
 public class Instructor {
 	private String instructorName;
 	private int sessionID;
-	private int timeslot;
+	private int timeSlot;
 	
 	public InstructorInfo (String in , int sid, int ts) {
 		instructorName = in;
@@ -25,37 +25,25 @@ public class Instructor {
 	
 	//separate place to keep track of instructors, their sessions, classrooms, timeslots
 	public static void main(String[] args) throws IOException {
-		//classrooms
-		int numClassrooms = 5;
-		//timeslots
-		int [] timeSlots = {830, 930, 1030, 1230, 130};
-		int sessions;
-		
-		//need to change magic number
-		ArrayList<String> instructorArray = new ArrayList<String>();
+		ArrayList<Instructor> instructors = new ArrayList<>();
 		String filename = "Senior Seminar Data.csv";
 		
-		//counter for loops
-		int count = 0;
+		File myFile = new File(filename);
+		Scanner scan = new Scanner(myFile);
 		
-			File myFile = new File(filename);
-			Scanner scan = new Scanner(myFile);
-			int i = 0;
-		
-			if (scan.hasNextLine()) {
-				scan.nextLine();
-			}
+		if (scan.hasNextLine()) {
+			scan.nextLine();
+		}
 
-			//read through each student file
-			while (scan.hasNextLine()) {
-				String line = scan.nextLine();
-				String[] data = line.split(",");
-				ArrayList<String> instructor = new ArrayList<String>();
-				instructor.add(data[17]);
-				instructor.add(data[18]);
-				i++;
+		//read through each student file
+		while (scan.hasNextLine()) {
+			String line = scan.nextLine();
+			String[] data = line.split(",");
+			String name = data[17];
+			int sid =Integer.parseInt(data[18]);
+			instructors.add(new Instructor(name, sid));
 			}
-			scan.close();
+		scan.close();
 		}
 	}
 	
