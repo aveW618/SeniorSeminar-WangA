@@ -46,18 +46,29 @@ public class LoadingAndAssignments {
 		int[] sessionRunTimes = howManyRuns(totalChoices, sessionIds);
 		
 		//an array list to keep track of the individual session IDs chosen by students, from the overall choice array list
-		ArrayList<Integer> sessionIds = getChosenSessions(totalChoices)
-
-			int totalStudent = 0;
-			for (int i = 0; i <= data.length; i++) {
-				totalStudent = totalStudent + student(i);
-			}
-		//load the data into a 2D array
-		int [][] choiceArray = loadChoiceArray(filename, numChoices);
+		ArrayList<Integer> sessionIds = getChosenSessions(totalChoices);
 		
-		//1D array to count how many times each session appears
-		int[] tallies = tallySessions(choiceArray, numSessions);
+		//5x5 arrays to place students into sessions (5 timeslots by 5 rooms)
+		int[][] sessionTracker = new int[timeslots][rooms];
+		int[][] sesionSpots = new int[timeslots][rooms];
+		
+		//load the arrays so that they are empty temporarily
+		for (int c = 0; c < timeslots; c++) {
+			for (int r = 0; r < rooms; r++) {
+				sessionTracker[c][r] = -1;
+				sessionSpots[c][r] = 0;
+			}
+		}
+		
+	//Array to help assign each student to one session for each timeslot
+	int[][] assigned = new int[numStudents][timeslots];
+	for (int s = 0; s < numStudents; s++) {
+		for (int t = 0; t < timeslots; t++) {
+			assigned[s][t] = -1;
+		}
 	}
+	
+	
 	
 	
 	
