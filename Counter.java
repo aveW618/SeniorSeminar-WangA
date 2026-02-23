@@ -2,6 +2,12 @@ import java.io.*;
 import java.util.*; 
 
 public class Counter {
+	public static void main(String[] args) throws IOException {
+
+        String filename = "Senior Seminar Data.csv";
+        File myFile = new File(filename);
+        Scanner scan = new Scanner(myFile);
+        
 	private int session1 = 0;
 	private int session2 = 0;
 	private int session3 = 0;
