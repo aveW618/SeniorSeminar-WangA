@@ -6,10 +6,10 @@ public class Instructor {
 	private int sessionID;
 	private int timeSlot;
 	
-	public InstructorInfo (String in , int sid, int ts) {
-		instructorName = in;
-		sessionID = sid;
-		timeslot = ts;
+	public Instructor (String in , int sid, int ts) {
+		this.instructorName = in;
+		this.sessionID = sid;
+		this.timeslot = ts;
 	}
 	
 	//getters

@@ -9,19 +9,19 @@ public class Session {
 	
 	//constructor for a session
 	public Session(int sessionID, String sessionName, String instructor) {
-		sessionID = sid;
-		sessionName = sn;
-		instructor = i;
+		this.sessionID = sessionID;
+		this.sessionName = sessionName;
+		this.instructor = instructor;
 	}
 	
 	//getters
 	public int getSessionID() {
 		return sessionID;
 	}
-	public int getSessionName() {
+	public String getSessionName() {
 		return sessionName;
 	}
-	public int getInstructor() {
+	public String getInstructor() {
 		return instructor;
 	}
 	
