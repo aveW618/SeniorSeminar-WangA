@@ -20,3 +20,6 @@ The attached CSV/Spreadsheet file is the result of sending out a google form and
 - Create lists for each student so they know what sessions to attend, rooms and times.
 
 
+Update for the weekend of 2/21-2/22 (missed class, makeup):
+I worked on fixing some syntax errors and also deleting redundant code for my counter class, instead choosing to use loops to keep track on info in arrays. I used counters to keep track of popularity for each of the instructor sessions to help determine which ones should have 1 or 2 sessions running. I also reorganized some of the timeslot and session room info into 5 x 5 arrays to better place and keep track of students and their locations for the day (this was in the loading and assignment array I created to help assign students). I started my main class that helps overall organization and keeping track of info from all 5  other classes to merge in the end when I assign students to their individual classes. I also refined my oragnization of Instructor info by starting to work on a list to keep track of them and the sessions they are teaching (still in progress).  
+
