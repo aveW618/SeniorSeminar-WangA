@@ -17,6 +17,11 @@ public class Instructor {
 		return instructorName;
 	}
 	
+	//toString method (so printed instructors can be read)
+	public String toString() {
+		return (instructorName + " " + sessionIDs);
+	}
+	
 	//keeping track of instructor info
 	public static ArrayList<Instructor> loadInstructors(String filename) throws IOException {
 		
@@ -41,12 +46,20 @@ public class Instructor {
 		scan.close();
 		return instructors;
 	}
-}
 
+	//main method to test if the loadInstructors method works
 	public static void main(String[] args) throws IOException {
 		//calls the loadInstructors method and inputs senior seminar data
-		ArrayList<Instructor> instructors = loadInstructos("Senior Seminar Data.csv");
+		ArrayList<Instructor> instructors = loadInstructors("Senior Seminar Data.csv");
 		
+		//prints out the Instructor objects to make sure the program runs as intented: load instructors
+		for(int i = 0; i < instructors.size(); i++) {
+			System.out.println(instructors.get(i));
 		}
+		
+		//prints out the number of instructors successfully loaded
+		System.out.println("Total Instructors loaded: " + instructors.size());
+			
 	}
+}
 	
