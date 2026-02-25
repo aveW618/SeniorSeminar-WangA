@@ -17,10 +17,10 @@ public class Instructor {
 		return instructorName;
 	}
 	
-	//separate place to keep track of instructors, their sessions, classrooms, timeslots
-	public static void main(String[] args) throws IOException {
+	//keeping track of instructor info
+	public static ArrayList<Instructor> loadInstructors(String filename) throws IOException {
+		
 		ArrayList<Instructor> instructors = new ArrayList<>();
-		String filename = "Senior Seminar Data.csv";
 		
 		File myFile = new File(filename);
 		Scanner scan = new Scanner(myFile);
@@ -29,19 +29,24 @@ public class Instructor {
 			scan.nextLine();
 		}
 
-		//read through each student file
+		//read through data and build an Instructor object for each row
 		while (scan.hasNextLine()) {
 			String line = scan.nextLine();
 			String[] data = line.split(",");
 			String name = data[17];
 			int sid = Integer.parseInt(data[18]);
-
-		scan.close();
+			
+			instructors.add(name, sid);
 		}
+		scan.close();
+		return instructors;
+	}
+}
+
+	public static void main(String[] args) throws IOException {
+		//calls the loadInstructors method and inputs senior seminar data
+		ArrayList<Instructor> instructors = loadInstructos("Senior Seminar Data.csv");
 		
-		//print out instructor list
-		for (Instructor instr : instructors) {
-			System.out.println(instr)
 		}
 	}
 	
