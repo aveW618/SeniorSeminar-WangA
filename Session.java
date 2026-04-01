@@ -45,7 +45,7 @@ public class Session {
 			String[] data = line.split(",");
 			
 			//stores the specific data for instructor name and their session ID
-			//trim to 
+			//trim to help prevent any bugs if there is an extra space at the end of file info
 			String instr = data[17].trim();
 			int sid = Integer.parseInt(data[18]);
 			

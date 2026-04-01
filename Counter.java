@@ -3,7 +3,8 @@ import java.util.*;
 
 public class Counter {
 	public static void main(String[] args) throws IOException {
-		
+		int count = 0;
+		for (int i = 0; i <= 2; i++) {
 		//importing data from the files
         String filename = "Senior Seminar Data.csv";
         File myFile = new File(filename);
@@ -31,7 +32,7 @@ public class Counter {
 				int sid = Integer.parseInt(data[choice]);
 				//increases the chosen session number from above's popularity by 1 for the counts array
 				if (sid >= 1 && sid <= 16) {
-					counts[sid]++;
+					counts(sid)++;
 				}
 				//increments counter for the number of session IDs
 				numSid++;
@@ -49,38 +50,43 @@ public class Counter {
 		//sid + 100 is the session id for a second session of a session that is very popular
 		//prints out the results from the while loop
 		for (int sid = (1 + 100); sid <= (16 + 100); sid++) {
-			System.out.println("Session " + (sid + 100) + ": " + counts[(sid + 100)]);
+			System.out.println("Session " + (sid + 100) + ": " + counts[sid + 100]);
 		}
 		
 		//helps me check if the class works and fills up different sessions, stopping when the sessions are filled
-		if (counts[sid] > 16) {
-			System.out.println("Session " sid + " full");
+		if (counts(sid) > 16) {
+			System.out.println("Session " + sid + " full");
 			//now increments every session ID by 100 so that the mod values are the same but I can keep track of a second session
 			for (int sid = (1 + 100); sid <= (16 + 100); sid++) {
 				//repeats the same steps for the second sessions
 				//prints out firstly the results from the popularity loops from before
-				System.out.println("Session " + (sid + 100) + counds[(sid + 100)]);
+				System.out.println("Session " + (sid + 100) + counts[(sid + 100)]);
 				//if there is more than 16 people in the second session as well, print that the sesison is full
 					//don't keep going because its a max of two sessions per course
-				if (counts[(sid + 100)] > 16)	{
-					System.out.println("Session " sid + " full");
+				if (counts[sid + 100] > 116)	{
+					System.out.println("Session " + sid + " full");
+					scan.hasNextLine();
 				}
 				//increments counter to account for additional sessions (2nd session)
 				numSid++;
 				sidList.add(sid);
 			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		}
+		if 
 		
 		//creates a new Array List to keep track of the session IDs but this time ranked by popularity
-		ArrayList <Integer> popularityRank = new ArrayList<Integer>();
+		ArrayList<Integer> popularityRank = new ArrayList<Integer>();
 		//loop through all the storied counts for the session ids and rank them by popularity (how many counts they)
 			//rank from highest to lowest
 		for (int i = 0; i < sidList.size; i++) {
 			//comparing the values next to each other the array lists
 			if (sidList.get(i) > sidList.get(i+1)) {
 				popularityRank.add(sidList.get(i));
+			}
+		}
 				
 	}
+}
 }
 			
 	

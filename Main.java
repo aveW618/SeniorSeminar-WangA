@@ -34,4 +34,10 @@ public class Main {
 		
 			for (int t = 0; t < 5; t++) {
 				
+		Schedule s1 = new Schedule();
+		s1. 
+		
+		
+		
+				
 				
