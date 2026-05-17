@@ -29,23 +29,20 @@ public class Main {
 		System.out.println();
 		System.out.println("Total sessions loaded: " + sessions.size());
 		
+		int largestSessionID = findLargestSessionID(sessions);
 		
-		//collects all the student choices
-		ArrayList<StudentChoices> totalChoices = new ArrayList<<5><5>>();
-		
-		//loading the sessions into an arrayList that is structured like the timetable
-			//5 times and 5 sessions at one time
-		totalchoices.loadSessions;
-		
-		//ignore this section for now, focus on first creating a schedule 
-			//and then later on about making sure one instructor does not have two classes at the same time
+		public static int findLargestSessionID(ArrayList <Session> sessions) {
+			int largest = 0;
 			
-		//loops through rows of the array list
-		//for (int i = 0; i < 5; i++) {
-			//loops through all the sesions of the row of the array list that has been reached in the first for loop
-			//for (int i = 0; i < sessions.size; i++) {
-				//creates an if loop to compare the sessions in the row of the array list that is being accessed
-				//if (sessions.get(0) 
+			for (int i = 0; i < sessions.size(); i++) {
+				if (sessions.get(i) > largest) {
+					largest = sessions.get(i);
+				}
+			}
+			
+			return largest;
+		}
+		
 	
 		//loop through every student
 		for (int i = 0; i < totalChoices.size(); i++) {
