@@ -30,37 +30,45 @@ public class Main {
 		System.out.println("Total sessions loaded: " + sessions.size());
 		
 		int largestSessionID = findLargestSessionID(sessions);
-		int[] sessionTally = countSessionRequests(students, largestSessionID);
+		int[] sessionPopularity = countSessionRequests(students, largestSessionID);
 		
-		public static int findLargestSessionID(ArrayList <Session> sessions) {
-			int largest = 0;
-			
-			for (int i = 0; i < sessions.size(); i++) {
-				if (sessions.get(i) > largest) {
-					largest = sessions.get(i);
-				}
-			}
-			
-			return largest;
+		System.out.println();
+		System.out.println("Number of session request: ");
+		for (int sid = 1; sid < sessionPopularity.length; sid++) {
+			System.out.println("Session " + sid + ": " + sessionPopularity[sid] + " requests");
 		}
 		
-		public static int[] countSessionRequests(ArrayList<Student> students, int largestSessionID) {
-			int[] counts = new int[largestSessionID + 1];
-			
-			for (Student student : students) {
-				int [] choices = students.ge(ChoicesArray();
-				
-				for (int i = 0; i < choices.length; i++) {
-					int sid = choices[i];
-					
-					if (sid > 0 && sid < counts.length) {
-						counts[sid]++;
-					}
-				}
-			}
-			return counts;
-		}
 	}
+		
+	public static int findLargestSessionID(ArrayList <Session> sessions) {
+		int largest = 0;
+		
+		for (int i = 0; i < sessions.size(); i++) {	
+			if (sessions.get(i) > largest) {
+				largest = sessions.get(i);
+			}
+		}
+		
+		return largest;
+	}
+		
+	public static int[] countSessionRequests(ArrayList<Student> students, int largestSessionID) {
+		int[] counts = new int[largestSessionID + 1];
+			
+		for (Student student : students) {
+			int [] choices = students.ge(ChoicesArray();
+				
+			for (int i = 0; i < choices.length; i++) {
+				int sid = choices[i];
+					
+				if (sid > 0 && sid < counts.length) {
+					counts[sid]++;
+				}
+			}
+		}
+		return counts;
+	}
+}
 		
 		//loop through every student
 		for (int i = 0; i < totalChoices.size(); i++) {
