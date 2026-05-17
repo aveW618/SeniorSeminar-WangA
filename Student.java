@@ -1,5 +1,9 @@
-//Avery Wang
-//Senior Seminar
+/**
+ * @author Avery Wang
+ * @since February 2026
+ * Program: Senior Seminar
+ * Purpose: 
+ */
 
 import java.io.*;
 import java.util.*; 
@@ -103,3 +107,39 @@ public class Student {
 	 * it returns 0  if the session was not one chosen by the students
 	 */
 	 
+	 public int getChoiceRank (int sessionId) {
+		for (int i = 0; i < choices.length; i++) {
+			//if the choice matches the session ID being looked for, and 1 to give the choice its proper ranking
+			if (choices[i] == sessionId) {
+				return i + 1;
+			}
+		}
+		//returns 0 if the session is not found in the student's choices
+		return 0;
+	}
+	
+	/*
+	 * a method that returns how many choices each student has
+	 */
+	public static int getChoiceCount() {
+		return choiceCount;
+	}
+	
+	//getters for all the student info
+	public int getId() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public int[] getChoices() {
+		return choices;
+	}
+	
+			
