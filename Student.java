@@ -2,7 +2,9 @@
  * @author Avery Wang
  * @since February 2026
  * Program: Senior Seminar
- * Purpose: 
+ * Purpose: Helps create one student in the scheduling program by storing the student's
+ * ID, name, email, and five ranked session choices. This class also loads in student information 
+ * from the CSV file so that schedule can assign each student to seminar sessions.
  */
 
 import java.io.*;
@@ -91,7 +93,7 @@ public class Student {
 		
 			//add the student if have a name, email, or at least one ranked choice in the CSV file
 			if (!name.equals("") || !email.equals("") || hasChoice) {
-				int studentId = student.size() + 1;
+				int studentId = students.size() + 1;
 			
 				students.add(new Student(studentId, name, email, choices));
 			}
@@ -141,5 +143,10 @@ public class Student {
 	public int[] getChoices() {
 		return choices;
 	}
+	
+	public String toString() {
+		return (id + " " + "(" + email + ")" + " " + name + ": " + choices[0] + ", " + choices[1] + ", " + choices[2] + ", " + choices[3] + ", " + choices[4]);
+	}
+}
 	
 			
