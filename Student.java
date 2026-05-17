@@ -28,18 +28,6 @@ public class Student {
 		this.email = email;
 		this.choices = choices;
 	}
-	 
-	public
-	
-	public int[] getChoicesArray() {
-		return new int[] {choice1, choice2, choice3, choice4, choice5};
-	}
-	
-	//toString method (so printed students can be read)
-	public String toString() {
-		return (studentUsername + ": " + choice1 + ", " + choice2 + ", " + choice3 + ", " + choice4 + ", " + choice5);
-	}
-	
 	
 	/* a method that loads all students from the student preference CSV file
 	 * it reads in the student name, email, and their five ranked session choices
@@ -82,31 +70,36 @@ public class Student {
 			for (int i = 0; i < choiceCount; i++) {
 				int column = firstChoiceColumn + i;
 					
-					//changes the boolean value so that the program will continue on
-					if (choices[i] > 0) {
-						hasChoice = true;
+				if (column < data.length) {
+					String value = data[column];
+					
+					//if the value is not empty, then store it into the choices array
+					if (!value.equals("")) {
+						choices[i] = Integer.parseInt(value);
+						
+						//keeps track of if there are choices ranked by the students
+						if (choices[i] > 0) {
+							hasChoice = true;
+						}
 					}
 				}
-				
-				if (hasChoice) {
-					int studentId = students.size() + 1;
-					String email = data[emailColumn];
-					String name = data[nameColumn];
-					
-					students.add(new Student(studentId, name, email, choices));
-				}
+			}
+		
+			//add the student if have a name, email, or at least one ranked choice in the CSV file
+			if (!name.equals("") || !email.equals("") || hasChoice) {
+				int studentId = student.size() + 1;
+			
+				students.add(new Student(studentId, name, email, choices));
 			}
 		}
+		
 		scan.close();
 		return students;
-	}
-			
-	/* a new method that returns the rank of a session that a student has chosen
-	 * returns 1 if its the student's first choice, 2 for the second choice, and on and on
-	 * it returns 0 if the session is not chosen by the student
+	} 
+	
+	/*
+	 * this method will return the rank of a session for this student
+	 * it will return 1 for the first choice, 2 for the second choice, and on and on
+	 * it returns 0  if the session was not one chosen by the students
 	 */
 	 
-	 public int getChoiceRank(int sessionId) {
-		 for (int i = 0; i < choices.length; i++) {
-			 
-
