@@ -1,24 +1,60 @@
+/**
+ * @author Avery Wang
+ * @since February 2026
+ * Program: Senior Seminar
+ * Purpose: Helps create one session in the scheduling program by storing the session
+ * ID, session name, presenter, request count, and popularity. This class also
+ * loads session information from the CSV file so the schedule can decide which
+ * sessions should run and where they should be placed.
+ */
+
 import java.io.*;
 import java.util.*; 
 
 public class Session {
-	//instance variables for session info
-	private int sessionID;
+	//values of where the session info is located in the CSV file
+	private static final int sessionNameColumn = 0;
+	private static final int sessionIdColumn = 1;
+	private static final int instructorColumn = 2;
+
+	//declaring instance variables needed for session info
+	private int id;
+	private String name;
 	private String instructor;
+	private int requests;
+	private int popularityPoints;
 	
-	//constructor for a session
-	public Session(int sid, String instr) {
-		sessionID = sid;
-		instructor = instr;
+	/*
+	 * a constructor that creates one session object
+	 * each session contains an Id, name, instructor, request count, and popularity points
+	 */
+	public Session(int id, String name, String instructor) {
+		this.id = id;
+		this.name = name;
+		this.instructor = instructor;
+		this.requests = 0;
+		this.popularityPoints = 0;
 	}
 	
-	//getters
-	public int getSessionID() {
-		return sessionID;
+	//getters for all the session info
+	public int getId() {
+		return id;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
 	public String getInstructor() {
 		return instructor;
 	}
+	
+	public int getRequests() {
+		return requests;
+	}
+	
+	public int getPopularityPoints() {
+		return popularityPoints
 	
 	//toString method
 	public String toString() {
