@@ -46,7 +46,7 @@ public class Student {
 	 */
 	public static ArrayList<Student> loadStudents(String filename) throws IOException {
 		//creates an array list to store student objects
-		ArrayList<Student> students = new ArrayList<>();
+		ArrayList<Student> students = new ArrayList<Student>();
 		
 		//loads in data
 		File myFile = new File(filename);
@@ -63,14 +63,33 @@ public class Student {
 			//reads through the data, splits it by commas, and also stores the names for the student objects
 			String line = scan.nextLine();
 			String[] data = line.split(",");
-			String name = data[3];
 			
-			//stores the choices from the data, converting everything into ints
-			int c1 = Integer.parseInt(data[10]);
-			int c2 = Integer.parseInt(data[11]);
-			int c3 = Integer.parseInt(data[12]);
-			int c4 = Integer.parseInt(data[13]);
-			int c5 = Integer.parseInt(data[14]);
+			if (data.length > firstChoiceColumn) {
+				int[] choices = new int[choiceCount];
+				boolean hasChoice = false;
+				
+				//stores the students' five choices from the csv file
+				for (int i = 0; i < choiceCount; i++) {
+					choices[i] = Integer.parseInt(data[firstChoiceColumn + i]);
+					
+					//changes the boolean value so that the program will continue on
+					if (choices[i] > 0) {
+						hasChoice = true;
+					}
+				}
+				
+				if (hasChoice) {
+					int studentId = students.size() + 1;
+					String email = data[emailColumn];
+					String name = data[nameColumn];
+					
+					students.add(new Student(studentId, name, email, choices));
+				}
+			}
+		}
+		scan.close();
+		return students;
+	}
 			
 			//method of array lists to create a new Student object to add to the arraylist students
 			students.add(new Student(name, c1, c2, c3, c4, c5));
