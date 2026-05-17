@@ -5,7 +5,30 @@ import java.io.*;
 import java.util.*; 
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
+		
+		String filename = "Senior Seminar Data.csv";
+		
+		ArrayList <Student> students = Student.loadStudents(filename);
+		ArrayList <Session> sessions = Session.loadSessions(filename);
+		
+		System.out.println("Students loaded: ");
+		for(int i = 0; i < students.size(); i++) {
+			System.out.println(students.get(i));
+		}
+		
+		System.out.println();
+		System.out.println("Total students loaded: " + students.size());
+		
+		System.out.println();
+		System.out.println("Sessions loaded: ");
+		for (int i = 0; i < sessions.size(); i++) {
+			System.out.println(sessions.get(i));
+		}
+		
+		System.out.println();
+		System.out.println("Total sessions loaded: " + sessions.size());
+		
 		
 		//collects all the student choices
 		ArrayList<StudentChoices> totalChoices = new ArrayList<<5><5>>();

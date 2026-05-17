@@ -98,21 +98,3 @@ public class Student {
 		return students;
 	}
 
-	//main method to test if the loadStudents method works
-	public static void main(String[] args) throws IOException {
-		//calls the loadStudents method and inputs senior seminar data
-		ArrayList<Student> students = loadStudents("Senior Seminar Data.csv");
-		
-		//prints out the Student objects to make sure the program runs as intented: load students
-		for(int i = 0; i < students.size(); i++) {
-			System.out.println(students.get(i));
-		}
-		
-		//prints out the number of students successfully loaded
-		System.out.println("Total Students loaded: " + students.size());
-			
-	}
-	
-}
-	
-

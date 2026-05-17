@@ -59,19 +59,4 @@ public class Session {
 		return sessions;
 	}
 	
-	// main method to test if the loadSessions method works
-	public static void main(String[] args) throws IOException {
-		// calls the loadSessions method and inputs senior seminar data
-		ArrayList<Session> sessions = loadSessions("Senior Seminar Data.csv");
-
-		// prints out the Session objects to make sure the program runs as intended: loads sessions
-		for (int i = 0; i < sessions.size(); i++) {
-			System.out.println(sessions.get(i));
-		}
-
-		// prints out the number of sessions successfully loaded
-		System.out.println("Total Sessions loaded: " + sessions.size());
-	}
-}
-	
 		
