@@ -8,8 +8,8 @@ public class Session {
 	
 	//constructor for a session
 	public Session(int sid, String instr) {
-		this.sessionID = sid;
-		this.instructor = instr;
+		sessionID = sid;
+		instructor = instr;
 	}
 	
 	//getters
