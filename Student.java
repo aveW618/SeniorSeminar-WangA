@@ -5,6 +5,18 @@ import java.io.*;
 import java.util.*; 
 
 public class Student {
+	//values of where the student info is located in the csv files
+	private static final int emailColumn = 1;
+	private static final int nameColumn = 2;
+	private static final int firstChoiceColumn = 3;
+	private static final int choiceCount = 5;
+	
+	//declaring variables needed for student info
+	private int id;
+	private String name;
+	private String email;
+	private int[] choices;
+	
 	//instance variables for the student object
 	private String studentUsername;
 	private int choice1;
