@@ -15,50 +15,21 @@ public class Student {
 	private int id;
 	private String name;
 	private String email;
+	//stores choice info
 	private int[] choices;
 	
-	//instance variables for the student object
-	private String studentUsername;
-	private int choice1;
-	private int choice2;
-	private int choice3;
-	private int choice4;
-	private int choice5;
-	
-	//constructor 
-	public Student (String name, int c1, int c2, int c3, int c4, int c5) {
-		studentUsername = name;
-		choice1 = c1;
-		choice2 = c2;
-		choice3 = c3;
-		choice4 = c4;
-		choice5 = c5;
+	/*
+	 * a constructor that creates one student object
+	 * each student has an ID, name, email, and an array of ranked session choices
+	 */
+	public Student (int id, String name, String email, int[] choices) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.choices = choices;
 	}
 	 
-	//getters
-	public String getStudentUsername() {
-		return studentUsername;
-	}
-	
-	public int getChoice1() {
-		return choice1;
-	}
-	
-	public int getChoice2() {
-		return choice2;
-	}
-	
-	public int getChoice3() {
-		return choice3;
-	}
-	
-	public int getChoice4() {
-		return choice4;
-	}
-	
-	public int getChoice5() {
-		return choice5;
-	}
+	public
 	
 	public int[] getChoicesArray() {
 		return new int[] {choice1, choice2, choice3, choice4, choice5};
@@ -70,7 +41,9 @@ public class Student {
 	}
 	
 	
-	//method to load students
+	/* a method that loads all students from the student preference CSV file
+	 * it reads in the student name, email, and their five ranked session choices
+	 */
 	public static ArrayList<Student> loadStudents(String filename) throws IOException {
 		//creates an array list to store student objects
 		ArrayList<Student> students = new ArrayList<>();
