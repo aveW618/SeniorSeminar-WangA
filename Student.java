@@ -15,12 +15,12 @@ public class Student {
 	
 	//constructor 
 	public Student (String name, int c1, int c2, int c3, int c4, int c5) {
-		this.studentUsername = name;
-		this.choice1 = c1;
-		this.choice2 = c2;
-		this.choice3 = c3;
-		this.choice4 = c4;
-		this.choice5 = c5;
+		studentUsername = name;
+		choice1 = c1;
+		choice2 = c2;
+		choice3 = c3;
+		choice4 = c4;
+		choice5 = c5;
 	}
 	 
 	//getters
@@ -46,6 +46,10 @@ public class Student {
 	
 	public int getChoice5() {
 		return choice5;
+	}
+	
+	public int[] getChoicesArray() {
+		return new int[] {choice1, choice2, choice3, choice4, choice5};
 	}
 	
 	//toString method (so printed students can be read)
@@ -77,11 +81,11 @@ public class Student {
 			String name = data[3];
 			
 			//stores the choices from the data, converting everything into ints
-			int c1 = Integer.parseInt(data[11]);
-			int c2 = Integer.parseInt(data[12]);
-			int c3 = Integer.parseInt(data[13]);
-			int c4 = Integer.parseInt(data[14]);
-			int c5 = Integer.parseInt(data[15]);
+			int c1 = Integer.parseInt(data[10]);
+			int c2 = Integer.parseInt(data[11]);
+			int c3 = Integer.parseInt(data[12]);
+			int c4 = Integer.parseInt(data[13]);
+			int c5 = Integer.parseInt(data[14]);
 			
 			//method of array lists to create a new Student object to add to the arraylist students
 			students.add(new Student(name, c1, c2, c3, c4, c5));
