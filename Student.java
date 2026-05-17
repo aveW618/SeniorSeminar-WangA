@@ -64,13 +64,23 @@ public class Student {
 			String line = scan.nextLine();
 			String[] data = line.split(",");
 			
-			if (data.length > firstChoiceColumn) {
-				int[] choices = new int[choiceCount];
-				boolean hasChoice = false;
+			String email = "";
+			String name = "";
+			
+			if (emailColumn < data.length) {
+				email = data[emailColumn];
+			}
+			
+			if (nameColumn < data.length) {
+				name = data[nameColumn];
+			}
+		
+			int[] choices = new int[choiceCount];
+			boolean hasChoice = false;
 				
-				//stores the students' five choices from the csv file
-				for (int i = 0; i < choiceCount; i++) {
-					choices[i] = Integer.parseInt(data[firstChoiceColumn + i]);
+			//stores the students' five choices from the csv file, blank choices are 0
+			for (int i = 0; i < choiceCount; i++) {
+				int column = firstChoiceColumn + i;
 					
 					//changes the boolean value so that the program will continue on
 					if (choices[i] > 0) {
@@ -91,14 +101,12 @@ public class Student {
 		return students;
 	}
 			
-			//method of array lists to create a new Student object to add to the arraylist students
-			students.add(new Student(name, c1, c2, c3, c4, c5));
-		}
-		
-		//ends the scanning of the data
-		scan.close();
-		
-		//returns the arraylist students with all the Student objects in it
-		return students;
-	}
+	/* a new method that returns the rank of a session that a student has chosen
+	 * returns 1 if its the student's first choice, 2 for the second choice, and on and on
+	 * it returns 0 if the session is not chosen by the student
+	 */
+	 
+	 public int getChoiceRank(int sessionId) {
+		 for (int i = 0; i < choices.length; i++) {
+			 
 
