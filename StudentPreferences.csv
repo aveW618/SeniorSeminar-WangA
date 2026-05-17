@@ -1,0 +1,70 @@
+﻿StudentID,Email,Name,Choice1,Choice2,Choice3,Choice4,Choice5
+1,pohla@countryday.net,Alexandra Marie Pohl,1,2,16,15,9
+2,formana@countryday.net,Annabel August Forman,1,16,15,7,17
+3,kovachh@countryday.net,Helen Kovach,1,18,15,16,6
+4,alberth@countryday.net,Herschel Morris Albert,1,12,3,2,9
+5,sullivanj@countryday.net,Jack Michael Kestner Sullivan,1,16,7,8,6
+6,rennerj@countryday.net,Jacob Renner,1,3,2,16,18
+7,settersk@countryday.net,Katelynn Renee Setters,1,3,2,9,11
+8,farrelll@countryday.net,Lily Taylor Farrell,1,3,2,10,11
+9,hartenm@countryday.net,Mary C. Harten,1,15,10,18,2
+10,fatuzzos@countryday.net,Stephen Holden Fatuzzo,1,9,16,7,2
+11,yangy@countryday.net,Yuxi Yang,1,16,17,15,13
+12,osborna@countryday.net,Andrew Pendleton (Andy) Osborn,2,9,1,12,15
+13,buechlyt@countryday.net,Anthony Jacob (Tony) Buechly,2,5,16,3,15
+14,rame@countryday.net,Emily Marie Ram,2,15,3,1,18
+15,bursef@countryday.net,Francis Burse,2,3,9,7,16
+16,taylorhu@countryday.net,Hunter Levi Taylor,2,7,3,15,1
+17,midham@countryday.net,Manav Dev Midha,2,12,6,16,15
+18,cordean@countryday.net,Nicholas William (Nick) Cordea,2,15,1,16,7
+19,thompsond@countryday.net,Dylan Niles Thompson,3,2,7,10,4
+20,nguyenn@countryday.net,Nicholas Minh (Nick) Nguyen,3,10,7,2,1
+21,,Enyi Li,3,1,10,6,16
+22,chandrakru@countryday.net,Ruben Chandrakumar,5,2,11,3,15
+23,hamalla@countryday.net,Alec Daniel Hamall,6,9,1,15,2
+24,dickersog@countryday.net,Garrett Janning Dickerson,6,8,16,9,2
+25,gersonn@countryday.net,Nathaniel Whitney (Nate) Gerson,6,15,16,2,1
+26,raminenia@countryday.net,Aadhyasri Ramineni,7,9,16,6,1
+27,gonzalese@countryday.net,Emily Susan Gonzales,7,1,6,15,16
+28,fleischme@countryday.net,Eric Robert Fleischmann,7,9,5,18,17
+29,straleyg@countryday.net,Grace Virginia Straley,7,1,16,6,15
+30,lylem@countryday.net,Harrison (Miller) Lyle,7,1,2,6,18
+31,folanm@countryday.net,Maxwell Richard Folan,7,15,12,5,1
+32,hatcherm@countryday.net,Moseley Quinn (Mose) Hatcher,7,2,13,17,14
+33,mangur@countryday.net,Radha Venkata Mangu,7,2,16,15,18
+34,williamsb@countryday.net,Bryon Michael Williamson,8,14,2,16,6
+35,cercekg@countryday.net,Gavin L. Cercek,8,1,14,12,9
+36,ellerj@countryday.net,Jeremy Eller,8,2,16,7,15
+37,paynej@countryday.net,Joshua Jabez (Josh) Payne,8,2,13,14,18
+38,riemannn@countryday.net,Nathaniel Christopher (Nathan) Riemann,8,2,16,15,9
+39,shihn@countryday.net,Nellie Yushuan Shih,8,7,1,15,14
+40,brants@countryday.net,Samantha Rose Brant,8,10,1,15,16
+41,taylors@countryday.net,Samuel Taylor,8,14,17,18,2
+42,mcneile@countryday.net,Emma Rachael McNeil,9,13,7,1,2
+43,kerschnee@countryday.net,Eric William Kerschner,9,18,2,13,6
+44,hettingep@countryday.net,Paige E. Hettinger,9,1,10,2,6
+45,stewarts@countryday.net,Sean Christopher Stewart,9,16,14,8,18
+46,snellst@countryday.net,Sterling Elijah Snell,9,15,13,1,16
+47,jeffriese@countryday.net,Ethan Mikal Jeffries,11,3,2,7,16
+48,jaccacis@countryday.net,Samuel A. (Sam) Jaccaci,11,7,1,15,16
+49,phillipsc@countryday.net,Catherine M. Phillips,13,14,4,11,16
+50,goingsc@countryday.net,William (Chase) Goings,13,7,16,1,2
+51,maggarda@countryday.net,Abigail Maye (Abby) Maggard,15,1,9,7,17
+52,webbc@countryday.net,Chloe Renee Webb,15,1,9,11,6
+53,westonf@countryday.net,Frank Weston,15,5,13,16,6
+54,smithn@countryday.net,Genevieve Claire (Nevie) Smith,15,1,2,6,7
+55,pfisterm@countryday.net,Grace (Morgan) Pfister,15,14,11,1,16
+56,hessh@countryday.net,Hannah Rose Hess,15,1,7,9,2
+57,reiringj@countryday.net,Jane (Janie) Reiring,15,1,7,9,2
+58,valenk@countryday.net,Katherine Rhea Valen,15,1,7,9,2
+59,boazk@countryday.net,Kayla M. Boaz,15,18,6,10,2
+60,hoffmanl@countryday.net,Lindsey Renee Hoffman,15,1,9,7,14
+61,wrightm@countryday.net,Margaret Langdon (Maggie) Wright,15,1,7,9,2
+62,lutzm@countryday.net,Mia E. Lutz,15,1,7,9,16
+63,briggsm@countryday.net,Molly Molloy Briggs,15,10,1,18,16
+64,yardleyo@countryday.net,Olivia Audrey Yardley,15,10,1,9,2
+65,bakers@countryday.net,Sydney Renee Baker,15,1,8,6,14
+66,zalantsv@countryday.net,Valen Irene Zalants,15,1,7,9,2
+67,kellert@countryday.net,Victoria Louise (Tori) Keller,15,6,1,17,16
+68,kellara@countryday.net,Ava Kellar,16,11,2,1,3
+69,puckettt@countryday.net,Trevor B. Puckett,18,16,1,8,7
