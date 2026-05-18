@@ -54,11 +54,12 @@ public class Session {
 	}
 	
 	public int getPopularityPoints() {
-		return popularityPoints
+		return popularityPoints;
+	}
 	
 	//toString method
 	public String toString() {
-		return("Session ID: " + sessionID + "\n" + "Instructor: " + instructor);
+		return("Session " + id + ": " + name + " by " + instructor);
 	}
 
 	/*
@@ -121,3 +122,8 @@ public class Session {
 	 * requests count how many students chose a specific session
 	 * popularity points give more value to higher-ranked choices
 	 */
+	public void addRequest(int pointsToAdd) {
+		requests++;
+		popularityPoints += pointsToAdd;
+	}
+}
