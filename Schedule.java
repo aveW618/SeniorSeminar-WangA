@@ -112,18 +112,42 @@ public class Schedule {
 	private boolean placeOneSession(Session session, int runNumber, int startingSlot) {
 		for (int f = 0; f < timeSlots; f++) {
 			int time = (startingSlot + f) % timeSlots;
-
+			
+			//calls a method that checks to make sure a session can be placed in the schedule
 			if (canPlaceInTimeSlot(session, time)) {
 				for (int room = 0; room < rooms; room++) {
+					//if the spot in the 2D array is empty, assign values to it
 					if (sessionGrid[time][room] == null) {
 						sessionGrid[time][room] = session;
 						runNumbers[time][room] = runNumber;
 						return true;
+					}
+				}
+			}
+		}
 
+		return false;
+	}
+
+	
 	/*
 	 * this method checks whether a session can be placed in one time slot
 	 * it prevents the same session and same presenter from appearing twice in that time slot
 	 */
 	private boolean canPlaceInTimeSlot(Session session, int time) {
+		//loops through all rooms to see if any have already been assigned
 		for (int room = 0; room < rooms; room++) {
 			Session alreadyPlaced = sessionGrid[time][room];
+			//if the room hasn't been assigned, return true, if it has been placed, return false
+			if (alreadyPlaced != null) {
+				//checks if a room has been placed through comparison with the session ID or instructor
+				if (alreadyPlaced.getId() == session.getId()) {
+					return false;
+				}
+				if (alreadyPlaced.getInstructor().equalsIgnoreCase(session.getInstructor())) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
