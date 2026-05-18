@@ -106,6 +106,30 @@ public class Schedule {
 	}
 	
 	/*
+	 * this method places sessions into the room and time slot grid
+	 * each session is placed once first, and popular sessions may run again
+	 */
+	public void placeSessions() {
+		//initial guidelines
+		int totalSpaces = timeSlots + rooms;
+		int placed = 0;
+
+		//place each session once first
+		for (int i = 0; i < sessions.size(); i++) {
+			//calls the method that places one session 
+			//actual parameter is the obtained session number
+			if (placeOneSession(sessions.get(i), 1)) {
+				placed++;
+			}
+		}
+		
+		boolean added = true;
+		
+		//add extra runs (of the session) if there is still space in the schedule
+		while (placed < totalSpaces) {
+		
+		
+	/*
 	 * this method tries to place one session in the schedule
 	 * it also avoids putting the same presenter in two rooms at the same time
 	 */
