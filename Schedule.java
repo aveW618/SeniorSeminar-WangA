@@ -44,3 +44,22 @@ public class Schedule {
 		this.sessions = sessions;
 		this.instructors = instructors;
 		
+		//initializing the arrays with student inputted info about the number of time slots and rooms
+		sessionGrid = new Session[timeSlots][rooms];
+		runNumbers = new int[timeSlots][rooms];
+		enrollments = new int[timeSlots][rooms];
+		
+		//initializing the arrays with inputted info as well as the students ArrayList size
+		studentSchedules = new Session[students.size()][timeSlots];
+		studentRooms = new int[students.size()][timeSlots];
+		studentChoiceRanks = new int[students.size()][timeSlots];
+		
+		//loops through all the students and time slots and sets the position in the studdent Rooms array to -1
+		//the -1 means the student has not been assigned to a room yet
+		for (int s = 0; s < students.size(); s++) {
+			for (int t = 0; t < timeSlots; t++) {
+				studentsRoom[s][t] = -1;
+			}
+		}
+	}
+		
