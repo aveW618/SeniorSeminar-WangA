@@ -94,7 +94,7 @@ public class Student {
 			//add the student if have a name, email, or at least one ranked choice in the CSV file
 			if (!name.equals("") || !email.equals("") || hasChoice) {
 				int studentId = students.size() + 1;
-			
+				
 				students.add(new Student(studentId, name, email, choices));
 			}
 		}
@@ -148,5 +148,3 @@ public class Student {
 		return (id + " " + "(" + email + ")" + " " + name + ": " + choices[0] + ", " + choices[1] + ", " + choices[2] + ", " + choices[3] + ", " + choices[4]);
 	}
 }
-	
-			
