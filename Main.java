@@ -2,47 +2,45 @@
  * @author Avery Wang
  * @since February 2026
  * Program: Senior Seminar
- * Purpose: 
+ * Purpose: Runs the senior seminar scheduling program by asking for schedule rules,
+ * loading student and session data, creating the schedule, and printing the results. 
+ * This is where all the methods made in other classes (such as the Schedule class) are going to be called
+ * to result in the final program.
  */
 
 import java.io.*;
 import java.util.*; 
 
 public class Main {
-	public static void main(String[] args) throws IOException{
+	//initializes the files to two separate CSV files
+	private static final String studentFile = "StudentPreferences.csv";
+	private static final String sessionFile = "SessionInstructors.csv";
+	
+	/*
+	 * this main method runs the scheduling program
+	 * it asks for schedule rules (from user input), loads the data, creates the schedule,
+	 * and prints the results/questions in a readable, understandable and user-friendly way
+	 */
+	public static void main(String[] args) throws IOException {
+		//reads in user input
+		Scanner input =  new Scanner(System.in);
 		
-		String filename = "Senior Seminar Data.csv";
-		
-		ArrayList <Student> students = Student.loadStudents(filename);
-		ArrayList <Session> sessions = Session.loadSessions(filename);
-		
-		System.out.println("Students loaded: ");
-		for(int i = 0; i < students.size(); i++) {
-			System.out.println(students.get(i));
-		}
-		
-		System.out.println();
-		System.out.println("Total students loaded: " + students.size());
-		
-		System.out.println();
-		System.out.println("Sessions loaded: ");
-		for (int i = 0; i < sessions.size(); i++) {
-			System.out.println(sessions.get(i));
-		}
+		System.out.print("How many time slots? ");
+		int timeSlots = input.nextInt();
 		
 		System.out.println();
-		System.out.println("Total sessions loaded: " + sessions.size());
-		
-		int largestSessionID = findLargestSessionID(sessions);
-		int[] sessionPopularity = countSessionRequests(students, largestSessionID);
+		System.out.print("How many rooms per time slot? ");
+		int rooms = input.nextInt();
 		
 		System.out.println();
-		System.out.println("Number of session request: ");
-		for (int sid = 1; sid < sessionPopularity.length; sid++) {
-			System.out.println("Session " + sid + ": " + sessionPopularity[sid] + " requests");
-		}
+		System.out.print("What is the room capacity? ");
+		int roomCapacity = intput.nextInt();
 		
-	}
+		System.out.println();
+		System.out.println("What is the maximum number of times one session can run? ");
+		int maxRunsPerSession = input.nextInt();
+		
+
 		
 	public static int findLargestSessionID(ArrayList <Session> sessions) {
 		int largest = 0;
