@@ -39,18 +39,24 @@ public class Instructor {
 	public static ArrayList<String> loadInstructorName(ArrayList<Session> sessions) {
 		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
 		
-		
-		if (scan.hasNextLine()) {
-			scan.nextLine();
-		}
+		for (int i = 0; i < sessions.size(); i++) {
+			Session session = sessions.get(i);
+			Instructor instructor = findInstructor(instructors, session.getPresenter());
 
-		//read through data and build an Instructor object for each row
-		while (scan.hasNextLine()) {
-			String line = scan.nextLine();
-			String[] data = line.split(",");
-			String name = data[17];
-			
-			instructorName.add(name);
+	/*
+	 * this method finds an instructor by name
+	 * it returns null if the instructor is not already in the list
+	 */
+	public static Instructor findInstructor(ArrayList<Instructor> instructors, String name) {
+		for (int i = 0; i < instructors.size(); i++) {
+			if (instructors.get(i).getName().equalsIgnoreCase(name)) {
+				return instructors.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
 		}
 		scan.close();
 		return instructorName;
