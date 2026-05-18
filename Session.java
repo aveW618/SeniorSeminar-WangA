@@ -61,10 +61,13 @@ public class Session {
 		return("Session ID: " + sessionID + "\n" + "Instructor: " + instructor);
 	}
 
-	//method to load sessions
+	/*
+	 * a method that loads all sessions from the session instructor CSV file
+	 * it reads in the session name, session ID, and instructor from that file
+	 */
 	public static ArrayList<Session> loadSessions(String filename) throws IOException {
 		// creates an array list to store Session objects
-		ArrayList<Session> sessions = new ArrayList<>();
+		ArrayList<Session> sessions = new ArrayList<Session>();
 		
 		// reads in data from the imported file
 		File myFile = new File(filename);
@@ -80,19 +83,41 @@ public class Session {
 			String line = scan.nextLine();
 			String[] data = line.split(",");
 			
-			//stores the specific data for instructor name and their session ID
-			//trim to help prevent any bugs if there is an extra space at the end of file info
-			String instr = data[17].trim();
-			int sid = Integer.parseInt(data[18]);
+			if (data.length > instructorColumn) {
+				String sessionName = data[sessionNameColumn];
+				String sessionIdText = data[sessionIdColumn];
+				String instructor = data[instructorColumn];
 			
-			//method of array lists to create a new Session object to add to the arraylist sessions
-			sessions.add(new Session(sid, instr));
+				//only add the session if the session ID is not blank
+				if (!sessionIdText.equals("")) {
+					int sessionId = Integer.parseInt(sessionIdText);
+			
+					//adds session info to the sessions ArrayList if that session has not already been added
+					if (findSession(sessions, sessionId) == null) {
+						sessions.add(new Session(sessionId, sessionName, instructor));
+					}
+				}
+			}
 		}
-		
-		//ends the scanning of the data
 		scan.close();
-		
 		return sessions;
 	}
 	
-		
+	/*
+	 * this method finds a session by its ID number
+	 * if the session is not found, the method returns null
+	 */
+	public static Session findSession(ArrayList<Session> sessions, int sessionId) {
+		for (int i = 0; i < sessions.size(); i++) {
+			if (sessions.get(i).getId() == sessionId) {
+				return sessions.get(i);
+			}
+		}
+		return null;
+	}
+			
+	/*
+	 * a method that adds popularity information about a session
+	 * requests count how many students chose a specific session
+	 * popularity points give more value to higher-ranked choices
+	 */
