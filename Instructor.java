@@ -14,13 +14,17 @@ public class Instructor {
 	private ArrayList<Integer> sessionIds;
 	private String instructor;
 	
+	/*
+	 * a consructor that creates an Instructor object
+	 * info includes the instructor name, session Id, etc.
+	 */
 	public Instructor (String name) {
 		this.name = name;
 		this.sessionIds = new ArrayList<Integer>();
 		this.instructor = instructor;
 	}
 	
-	//getters
+	//getters that return info
 	public String getName() {
 		return name;
 	}
@@ -46,15 +50,20 @@ public class Instructor {
 	public static ArrayList<Instructor> loadInstructors(ArrayList<Session> sessions) {
 		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
 		
+		//goes through every session and gets the current one
 		for (int i = 0; i < sessions.size(); i++) {
 			Session session = sessions.get(i);
+			
+			//checks if the session's instructor is already in the instructor list
 			Instructor instructor = findInstructor(instructors, session.getInstructor());
 			
+			//if there instructor is not already in the list, create a new Instructor object
 			if (instructor == null) {
 				instructor = new Instructor(session.getInstructor());
 				instructors.add(instructor);
 			}
-
+			
+			//add the session ID to the instructor's list of sessions
 			instructor.addSessionId(session.getId());
 		}
 

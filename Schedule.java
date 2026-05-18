@@ -109,12 +109,14 @@ public class Schedule {
 	 * this method sorts the sessions from most popular to least popular (after the ranking from the countPopularity method)
 	 */
 	private void sortSessionsByPopularity() {
+		
 		//loops through all the sessions
 		for (int i = 0; i < sessions.size() - 1; i++) {
 			for (int j = i + 1; j < sessions.size(); j++) {
 				
 				//ranks the sessions from greatest to least (max value is found)
 				if (sessions.get(j).getPopularityPoints() > sessions.get(i).getPopularityPoints()) {
+					
 					//uses a temporary value to swap the max value
 					Session temp = sessions.get(i);
 					sessions.set(i, sessions.get(j));
@@ -129,6 +131,7 @@ public class Schedule {
 	 * each session is placed once first, and popular sessions may run again
 	 */
 	private void placeSessions() {
+		
 		//initial guidelines set that later might be updated
 		int totalSpaces = timeSlots * rooms;
 		int placed = 0;
@@ -148,17 +151,20 @@ public class Schedule {
 		
 		//add extra runs (of the session) if there is still space in the schedule
 		while (placed < totalSpaces && added) {
+			
 			//changes the added boolean from true to false such that after this loop has run, the boolean
 				//can change back to true, ending the loop
 			added = false;
 			
 			//loops through the sessions to see if there are popular sessions and count how many times they run
 			for (int i = 0; i < sessions.size() && placed < totalSpaces; i++) {
+				
 				Session session = sessions.get(i);
 				int currentRuns = countRuns(session.getId());
 				
 				//only add another run if the session already has at least 1 run and has not reached the max number of runs
 				if (currentRuns > 0 && currentRuns < maxRunsPerSession) {
+					
 					//place the sesion into an open slot in the schedule
 						//by calling the placeOneSession method with proper parameters
 					if (placeOneSession(session, currentRuns + 1, placed)) {
@@ -181,6 +187,7 @@ public class Schedule {
 			//calls a method that checks to make sure a session can be placed in the schedule
 			if (canPlaceInTimeSlot(session, time)) {
 				for (int room = 0; room < rooms; room++) {
+					
 					//if the spot in the 2D array is empty, assign values to it
 					if (sessionGrid[time][room] == null) {
 						sessionGrid[time][room] = session;
@@ -200,15 +207,19 @@ public class Schedule {
 	 * it prevents the same session and same instructor from appearing twice in that time slot
 	 */
 	private boolean canPlaceInTimeSlot(Session session, int time) {
+		
 		//loops through all rooms to see if any have already been assigned
 		for (int room = 0; room < rooms; room++) {
 			Session alreadyPlaced = sessionGrid[time][room];
+			
 			//if the room hasn't been assigned, return true, if it has been placed, return false
 			if (alreadyPlaced != null) {
+				
 				//checks if a room has been placed through comparison with the session ID or instructor
 				if (alreadyPlaced.getId() == session.getId()) {
 					return false;
 				}
+				
 				if (alreadyPlaced.getInstructor().equalsIgnoreCase(session.getInstructor())) {
 					return false;
 				}
@@ -222,9 +233,12 @@ public class Schedule {
 	 */
 	private int countRuns(int sessionId) {
 		int count = 0;
+		
 		//loops through the schedule (room and times) to find where sessions are placed (if so, increment counter by 1)
 		for (int time = 0; time < timeSlots; time++) {
 			for (int room = 0; room < rooms; room++) {
+				
+				//checks if there is a looped through session matches the one being counted
 				if (sessionGrid[time][room] != null && sessionGrid[time][room].getId() == sessionId) {
 					count++;
 				}
@@ -311,8 +325,10 @@ public class Schedule {
 			//if the session isn't null, checks to see if it has space
 			if (session != null) {
 				boolean hasSpace = enrollments[time][room] < roomCapacity;
+				
 				//calls a method to see if a student already has a session
 				boolean alreadyHasSession = studentAlreadyHasSession(studentIndex, session.getId());
+				
 				//if there is an empty space in the room, or the enrollment number is less than the enrollment
 				//of the current best room, set the best room as this new room
 				if (hasSpace && !alreadyHasSession) {
@@ -333,6 +349,7 @@ public class Schedule {
 	 */
 	private boolean studentAlreadyHasSession(int studentIndex, int sessionId) {
 		for (int time = 0; time < timeSlots; time++) {
+			
 			//if the student schedule at a mentioned time isn't empty and the session ID of that time in the schedule
 			//matches the session ID being checked, then return true
 			if (studentSchedules[studentIndex][time] != null && studentSchedules[studentIndex][time].getId() == sessionId) {
@@ -346,15 +363,18 @@ public class Schedule {
 	/*
 	 * a method which prints a summary of the final schedule
 	 * it includes total conflicts and average conflicts per student, sessions and students loaded, etc.
+	 * I initially tried to do a fancy
 	 */
 	public void printSummary() {
+		//initializes values
 		int totalConflicts = countConflicts();
 		double conflictsPerStudent = 0.0;
-
+		
+		//calculates the conflicts per student by dividing total conflicts by total students
 		if (students.size() > 0) {
 			conflictsPerStudent = (double) totalConflicts / students.size();
 		}
-
+		
 		System.out.println("========== Schedule Summary ==========");
 		System.out.println("Students loaded: " + students.size());
 		System.out.println("Sessions loaded: " + sessions.size());
@@ -370,9 +390,10 @@ public class Schedule {
 	 * also includes how many people are enrolled in each room out of the capacity
 	 */
 	public void printSessionGrid() {
+		//header for readability
 		System.out.println("========== Session Grid ==========");
 
-		//loops through and prints out the time slots (even spacing)
+		//loops through and prints out the time slots and other schedule info
 		for (int time = 0; time < timeSlots; time++) {
 			System.out.println();
 			System.out.println("Time Slot " + (time + 1) + ":");
@@ -384,6 +405,7 @@ public class Schedule {
 				if (session == null) {
 					System.out.println("\tRoom " + (room + 1) + ": Empty");
 				}
+				
 				//otherwise, displays the session number in its correct cell
 				else {
 					System.out.println("\tRoom " + (room + 1) + ": S" + session.getId() + " (" + enrollments[time][room] + "/" + roomCapacity + ")");
@@ -401,6 +423,7 @@ public class Schedule {
 	*/
 	public void printSpeakerSchedule() {
 		System.out.println("========== Speaker Schedule ==========");
+		
 		//loops through the instructors, getting their info
 		for (int i = 0; i < instructors.size(); i++) {
 			Instructor instructor = instructors.get(i);
@@ -413,6 +436,7 @@ public class Schedule {
 
 				for (int room = 0; room < rooms; room++) {
 					Session session = sessionGrid[time][room];
+					
 					//if the session's corresponding instructor info matches the instructor currently being looped through
 						//print out the time slot, room, and session info
 					if (session != null && session.getInstructor().equalsIgnoreCase(instructor.getName())) {
@@ -435,10 +459,13 @@ public class Schedule {
 	/*
 	 * this method prints each student's schedule as a simple list
 	 * each student has one line for each session they should attend
+	 * it took some thinking about what sort of displayed output would be most convenient
+	 * for the user to read and actually make sense of
 	 */
 	public void printStudentLists() {
 		System.out.println("========== Student Schedules ==========");
-
+		
+		//loops through students and time slots
 		for (int s = 0; s < students.size(); s++) {
 			System.out.println(students.get(s).getName() + ":");
 
@@ -462,11 +489,15 @@ public class Schedule {
 	/*
 	 * this method counts how many conflicts one student has
 	 * a conflict means the student did not get one of their ranked choices
+	 * I had to spend some time thinking about what a conflict would mean 
+	 * but also what that definition would look like in numbers/code
 	 */
 	private int countConflictsForStudent(int studentIndex) {
 		int count = 0;
 
 		for (int time = 0; time < timeSlots; time++) {
+			//checks to see if the student schedule has an empty spot or if one of there assignments has a choice rank of 0
+				//if there is a choice rank of 0, it means the session was not on their ranked list
 			if (studentSchedules[studentIndex][time] == null || studentChoiceRanks[studentIndex][time] == 0) {
 				count++;
 			}
@@ -480,9 +511,12 @@ public class Schedule {
 	 */
 	private int countAssignments() {
 		int count = 0;
-		//loops through the schedule, if the spot isn't empty, increment the counter by 1
+		
+		//loops through the schedule
 		for (int s = 0; s < students.size(); s++) {
 			for (int time = 0; time < timeSlots; time++) {
+				
+				//if the spot isn't empty, increment the counter by 1
 				if (studentSchedules[s][time] != null) {
 					count++;
 				}
