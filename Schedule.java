@@ -212,4 +212,23 @@ public class Schedule {
 	 * it goes through ranked choices first, then assigns students to open sessions if needed
 	 */
 	 public void assignStudents() {
+		 //loops through each time slot and choice ranking
+		 for (int time = 0; time < timeSlots; time++) {
+			for (int choiceRank = 1; choiceRank < Student.getChoiceCount(); choiceRank++) {
+				for (int s = 0; s < students.size(); s++) {
+					//only assigns the student if they do not already have a session for the time specified
+					if (studentSchedules[s][time] == null) {
+						int wantedSessionId = students.get(s).getChoices();
+						int room = findOpenRoom(time, wantedSessionId, s);
+						//if there is an open room, assign the student to that session
+						if (room != -1) {
+							studentSchedules[s][time] = sessionGrid[time][room];
+							studentRooms[s][time] = room;
+							studentChoiceRanks[s][time] = choiceRank;
+							//increases the number of students in that room
+							enrollments[time][room]++;
+						}
+					}
+				}
+			}
 		 
