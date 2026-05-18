@@ -22,6 +22,7 @@ public class Schedule {
 	
 	//declaring 2D arrays to keep track of sessions and enrollment numbers
 	private Session[][] sessionGrid;
+	private int[][] runNumbers; //keeps track of what run of the session is ongoing
 	private int[][] enrollments;
 	
 	//declaring more 2D arrays to keep track of student schedules, session rooms, and their session rankings
@@ -85,4 +86,44 @@ public class Schedule {
 			}
 		}
 	}
-		
+	
+	/*
+	 * this method sorts the sessions from most popular to least popular (after the ranking from the countPopularity method)
+	 */
+	private void sortSessionsByPopularity() {
+		//loops through all the sessions
+		for (int i = 0; i < sessions.size() - 1; i++) {
+			for (int j = i + 1; j < sessions.size(); j++) {
+				//ranks the sessions from greatest to least (max value is found)
+				if (sessions.get(j).getPoints() > sessions.get(i).getPoints()) {
+					//uses a temporary value to swap the max value
+					Session temp = sessions.get(i);
+					sessions.set(i, sessions.get(j));
+					sessions.set(j, temp);
+				}
+			}
+		}
+	}
+	
+	/*
+	 * this method tries to place one session in the schedule
+	 * it also avoids putting the same presenter in two rooms at the same time
+	 */
+	private boolean placeOneSession(Session session, int runNumber, int startingSlot) {
+		for (int f = 0; f < timeSlots; f++) {
+			int time = (startingSlot + f) % timeSlots;
+
+			if (canPlaceInTimeSlot(session, time)) {
+				for (int room = 0; room < rooms; room++) {
+					if (sessionGrid[time][room] == null) {
+						sessionGrid[time][room] = session;
+						runNumbers[time][room] = runNumber;
+						return true;
+
+	/*
+	 * this method checks whether a session can be placed in one time slot
+	 * it prevents the same session and same presenter from appearing twice in that time slot
+	 */
+	private boolean canPlaceInTimeSlot(Session session, int time) {
+		for (int room = 0; room < rooms; room++) {
+			Session alreadyPlaced = sessionGrid[time][room];
