@@ -12,15 +12,21 @@ public class Instructor {
 	//declares instance variables for future use
 	private String name;
 	private ArrayList<Integer> sessionIds;
+	private String instructor;
 	
 	public Instructor (String name) {
 		this.name = name;
 		this.sessionIds = new ArrayList<Integer>();
+		this.instructor = instructor;
 	}
 	
 	//getters
 	public String getName() {
 		return name;
+	}
+	
+	public String getInstructor() {
+		return instructor;
 	}
 	
 	public ArrayList<Integer> getSessionIds() {

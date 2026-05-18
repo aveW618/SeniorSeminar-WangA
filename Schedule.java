@@ -372,32 +372,24 @@ public class Schedule {
 	public void printSessionGrid() {
 		System.out.println("========== Session Grid ==========");
 
-		System.out.println("Time Slot\t");
-		//loops through and prints out the rooms (user-friendly spacing/design)
-		for (int room = 0; room < rooms; room++) {
-			System.out.println("Room " + (room + 1));
-		}
-
-		System.out.println();
 		//loops through and prints out the time slots (even spacing)
 		for (int time = 0; time < timeSlots; time++) {
-			System.out.println("Slot " + (time + 1));
+			System.out.println();
+			System.out.println("Time Slot " + (time + 1) + ":");
 
 			for (int room = 0; room < rooms; room++) {
 				Session session = sessionGrid[time][room];
+				
 				//displays empty if the session is not running/filled
 				if (session == null) {
-					System.out.println("Empty\t\t");
-				} 
+					System.out.println("\tRoom " + (room + 1) + ": Empty");
+				}
 				//otherwise, displays the session number in its correct cell
 				else {
-					String cell = "S" + session.getId() + " (" + enrollments[time][room] + "/" + roomCapacity + ")";
-					System.out.println(cell + "\t\t");
-				}
+					System.out.println("\tRoom " + (room + 1) + ": S" + session.getId() + " (" + enrollments[time][room] + "/" + roomCapacity + ")");
 			}
-
-			System.out.println();
 		}
+	}
 
 		System.out.println();
 		System.out.println("S# means session ID. The number in parentheses is enrolled students / room capacity.");
