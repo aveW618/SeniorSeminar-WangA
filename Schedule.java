@@ -424,7 +424,22 @@ public class Schedule {
 		}
 	}
 	
-				
+	/*
+	 * this method counts how many conflicts one student has
+	 * a conflict means the student did not get one of their ranked choices
+	 */
+	private int countConflictsForStudent(int studentIndex) {
+		int count = 0;
+
+		for (int time = 0; time < timeSlots; time++) {
+			if (studentSchedules[studentIndex][time] == null || studentChoiceRanks[studentIndex][time] == 0) {
+				count++;
+			}
+		}
+
+		return count;
+	}
+	
 	/*
 	 * this method counts how many student assignments were made
 	 */
