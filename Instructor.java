@@ -1,34 +1,44 @@
+/**
+ * @author Avery Wang
+ * @since February 2026
+ * Program: Senior Seminar
+ * Purpose: Helps track which instructor teaches which sessions. This helps make sure that
+ * the same instructor is not scheduled to teach two sessions at the same time.
+ */
 import java.io.*;
 import java.util.*; 
 
 public class Instructor {
-	private String instructorName;
-
-	//sessions an instructor can teacher  (1-2)
-	private ArrayList<Integer> sessionIDs;
+	//declares instance variables for future use
+	private String name;
+	private ArrayList<Integer> sessionIds;
 	
 	public Instructor (String name) {
-		this.instructorName = name;
-		this.sessionIDs = new ArrayList<>();
+		this.name = name;
+		this.sessionIds = new ArrayList<Integer>();
 	}
 	
 	//getters
-	public String getInstructorName() {
-		return instructorName;
+	public String getName() {
+		return name;
 	}
 	
-	//toString method (so printed instructors can be read)
+	public ArrayList<Integer> getSessionIds() {
+		return sessionIds;
+	}
+	
+	//toString method that converts the information into string format
 	public String toString() {
-		return (instructorName + " " + sessionIDs);
+		return (name + " teaches " + sessionIds);
 	}
 	
-	//keeping track of instructor info
-	public static ArrayList<String> loadInstructorName(String filename) throws IOException {
+	/*
+	 * this method creates a list of instructors from the session list
+	 * if the same instructor teaches multiple sessions, those session IDs are then grouped together
+	 */
+	public static ArrayList<String> loadInstructorName(ArrayList<Session> sessions) {
+		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
 		
-		ArrayList<String> instructorName = new ArrayList<>();
-		
-		File myFile = new File(filename);
-		Scanner scan = new Scanner(myFile);
 		
 		if (scan.hasNextLine()) {
 			scan.nextLine();
