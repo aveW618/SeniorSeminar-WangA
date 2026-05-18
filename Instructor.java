@@ -37,7 +37,7 @@ public class Instructor {
 	 * if the same instructor teaches multiple sessions, those session IDs are then grouped together
 	 * also gets instructor information to add using the accessor methods
 	 */
-	public static ArrayList<String> loadInstructors(ArrayList<Session> sessions) {
+	public static ArrayList<Instructor> loadInstructors(ArrayList<Session> sessions) {
 		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
 		
 		for (int i = 0; i < sessions.size(); i++) {
@@ -69,3 +69,12 @@ public class Instructor {
 		return null;
 	}
 	
+	/*
+	 * this method adds a session ID to the instructor's list of sessionIds
+	 */
+	public void addSessionId(int sessionId) {
+		if (!sessionIds.contains(sessionId)) {
+			sessionIds.add(sessionId);
+		}
+	}
+}
