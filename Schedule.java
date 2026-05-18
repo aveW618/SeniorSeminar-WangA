@@ -189,3 +189,27 @@ public class Schedule {
 		}
 		return true;
 	}
+	
+	/*
+	 * this method counts how many times a session has already been placed
+	 */
+	private int countRuns(int sessionId) {
+		int count = 0;
+		//loops through the schedule (room and times) to find where sessions are placed (if so, increment counter by 1)
+		for (int time = 0; time < timeSlots; time++) {
+			for (int room = 0; room < rooms; room++) {
+				if (sessionGrid[time][room] != null) {
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+	
+	/*
+	 * a method which assigns students to sessions
+	 * it goes through ranked choices first, then assigns students to open sessions if needed
+	 */
+	 public void assignStudents() {
+		 
