@@ -20,10 +20,27 @@ public class Schedule {
 	private ArrayList<Session> sessions;
 	private ArrayList<Instructor> instructors;
 	
-	//declaring arrays to keep track of session and number of students
-	private int[][] sessionGrid;
-	private int[][] numStudents;
+	//declaring 2D arrays to keep track of sessions and enrollment numbers
+	private Session[][] sessionGrid;
+	private int[][] enrollments;
 	
-	public Schedule() {
-		sessionGrid = new int[timeSlots][rooms];
+	//declaring more 2D arrays to keep track of student schedules, session rooms, and their session rankings
+	private Session[][] studentSchedules;
+	private int[][] studentRooms;
+	private int[][] studentChoiceRanks;
+	
+	/*
+	 * a constructor that creates the Schedule object
+	 * it stores the schedule guidlines, students, sessions, and instructors
+	 */
+	public Schedule(int timeSlots, int rooms, int roomCapacity, int maxRunsPerSession, ArrayList<Student> students, 
+					ArrayList<Session> sessions, <Instructor> instructors) {
+		this.timeSlots = timeSlots;
+		this.rooms = rooms;
+		this.roomCapacity = roomCapacity;
+		this.maxRunsPerSession = maxRunsPerSession;
+
+		this.students = students;
+		this.sessions = sessions;
+		this.instructors = instructors;
 		
