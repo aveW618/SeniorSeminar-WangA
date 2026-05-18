@@ -36,7 +36,7 @@ public class Main {
 		
 		System.out.println();
 		System.out.print("What is the room capacity? ");
-		int roomCapacity = intput.nextInt();
+		int roomCapacity = input.nextInt();
 		
 		System.out.println();
 		System.out.println("What is the maximum number of times one session can run? ");
@@ -52,19 +52,26 @@ public class Main {
 			//it also stores in the info gained from Main class calls to methods from other classes
 		Schedule schedule = new Schedule(timeSlots, rooms, roomCapacity, maxRunsPerSession, students, sessions, instructors);
 	
-	
-			for (int i = 0; i < choices.length; i++) {
-				int sid = choices[i];
-					
-				if (sid > 0 && sid < counts.length) {
-					counts[sid]++;
-				}
-			}
-		}
-		return counts;
+		//calls other methods from the Schedule class on the schedule object
+			//this helps display all the user info, etc. 
+		schedule.createSchedule();
+
+		System.out.println();
+		schedule.printSummary();
+
+		System.out.println();
+		schedule.printSessionGrid();
+
+		System.out.println();
+		schedule.printSpeakerSchedule();
+
+		System.out.println();
+		schedule.printStudentLists();
+		
+		//ends the scanner function for the class
+		input.close();
 	}
 }
-
 		
 				
 				

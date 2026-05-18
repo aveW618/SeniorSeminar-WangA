@@ -65,6 +65,17 @@ public class Schedule {
 	}
 	
 	/*
+	 * this method runs the full scheduling process
+	 * it counts popularity, sorts sessions, places sessions, and assigns students
+	 */
+	public void createSchedule() {
+		countPopularity();
+		sortSessionsByPopularity();
+		placeSessions();
+		assignStudents();
+	}
+	
+	/*
 	 * a method which counts how popular each session is (based on ranking)
 	 * first choices get more points than later choices
 	 */
