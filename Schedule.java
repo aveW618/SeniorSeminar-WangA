@@ -78,9 +78,11 @@ public class Schedule {
 	/*
 	 * a method which counts how popular each session is (based on ranking)
 	 * first choices get more points than later choices
+	 * this was the application of my original thought process of how I would assign sessions (by popularity)
 	 */
 	private void countPopularity() {
 		for (int s = 0; s < students.size(); s++) {
+			
 			//gets the student choices and stores them in the choices array
 			Student student = students.get(s);
 			int[] choices = student.getChoices();
@@ -91,7 +93,12 @@ public class Schedule {
 				
 				//tallies up the point values for student choices
 				if (session != null) {
+					
+					//gives more points to higher-ranked choices
 					int points = Student.getChoiceCount() - c;
+					
+					//adds one request and the popularity points to the corresponding session
+						//helps with the future session assignment in a rank of popularity
 					session.addRequest(points);
 				}
 			}
@@ -105,6 +112,7 @@ public class Schedule {
 		//loops through all the sessions
 		for (int i = 0; i < sessions.size() - 1; i++) {
 			for (int j = i + 1; j < sessions.size(); j++) {
+				
 				//ranks the sessions from greatest to least (max value is found)
 				if (sessions.get(j).getPopularityPoints() > sessions.get(i).getPopularityPoints()) {
 					//uses a temporary value to swap the max value
@@ -121,12 +129,13 @@ public class Schedule {
 	 * each session is placed once first, and popular sessions may run again
 	 */
 	private void placeSessions() {
-		//initial guidelines
+		//initial guidelines set that later might be updated
 		int totalSpaces = timeSlots * rooms;
 		int placed = 0;
 
-		//place each session once first
+		//place each session once first, but only if there is room
 		for (int i = 0; i < sessions.size() && placed < totalSpaces; i++) {
+			
 			//calls the method that places one session 
 			//actual parameter includes the obtained session number
 			if (placeOneSession(sessions.get(i), 1, placed)) {
@@ -134,18 +143,24 @@ public class Schedule {
 			}
 		}
 		
+		//keeps track of whether a session has been placed
 		boolean added = true;
 		
 		//add extra runs (of the session) if there is still space in the schedule
 		while (placed < totalSpaces && added) {
+			//changes the added boolean from true to false such that after this loop has run, the boolean
+				//can change back to true, ending the loop
 			added = false;
+			
 			//loops through the sessions to see if there are popular sessions and count how many times they run
 			for (int i = 0; i < sessions.size() && placed < totalSpaces; i++) {
 				Session session = sessions.get(i);
 				int currentRuns = countRuns(session.getId());
-				//only add another run if the session already runs and has not reached the max number of runs
+				
+				//only add another run if the session already has at least 1 run and has not reached the max number of runs
 				if (currentRuns > 0 && currentRuns < maxRunsPerSession) {
 					//place the sesion into an open slot in the schedule
+						//by calling the placeOneSession method with proper parameters
 					if (placeOneSession(session, currentRuns + 1, placed)) {
 						placed++;
 						added = true;
@@ -341,12 +356,12 @@ public class Schedule {
 		}
 
 		System.out.println("========== Schedule Summary ==========");
-		System.out.printf("                         " +  "%d /n", "Students loaded:", students.size());
-		System.out.printf("                         " +  "%d /n", "Sessions loaded:", sessions.size());
-		System.out.printf("                         " +  "%d /n", "Instructors loaded:", instructors.size());
-		System.out.printf("                         " +  "%d /n", "Assignments made:", countAssignments());
-		System.out.printf("                         " +  "%d /n", "Total conflicts:", totalConflicts);
-		System.out.printf("                         " +  "%d /n", "Conflicts per student:", conflictsPerStudent);
+		System.out.println("Students loaded: ", students.size());
+		System.out.println("Sessions loaded: ", sessions.size());
+		System.out.println("Instructors loaded: ", instructors.size());
+		System.out.println("Assignments made: ", countAssignments());
+		System.out.println("Total conflicts: ", totalConflicts);
+		System.out.println("Conflicts per student: ", conflictsPerStudent);
 	}
 	
 	/*
@@ -357,27 +372,27 @@ public class Schedule {
 	public void printSessionGrid() {
 		System.out.println("========== Session Grid ==========");
 
-		System.out.printf("            ", "Time Slot");
+		System.out.println("Time Slot\t");
 		//loops through and prints out the rooms (user-friendly spacing/design)
 		for (int room = 0; room < rooms; room++) {
-			System.out.printf("               ", "Room " + (room + 1));
+			System.out.println("Room " + (room + 1));
 		}
 
 		System.out.println();
 		//loops through and prints out the time slots (even spacing)
 		for (int time = 0; time < timeSlots; time++) {
-			System.out.printf("            ", "Slot " + (time + 1));
+			System.out.println("Slot " + (time + 1));
 
 			for (int room = 0; room < rooms; room++) {
 				Session session = sessionGrid[time][room];
 				//displays empty if the session is not running/filled
 				if (session == null) {
-					System.out.printf("               ", "Empty");
+					System.out.println("Empty\t\t");
 				} 
 				//otherwise, displays the session number in its correct cell
 				else {
 					String cell = "S" + session.getId() + " (" + enrollments[time][room] + "/" + roomCapacity + ")";
-					System.out.printf("               ", cell);
+					System.out.println(cell + "\t\t");
 				}
 			}
 
