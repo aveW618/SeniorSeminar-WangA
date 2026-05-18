@@ -25,6 +25,8 @@ public class Main {
 		//reads in user input
 		Scanner input =  new Scanner(System.in);
 		
+		//the following displays questions to obain user input about the capacity for various scheduling aspects
+			//including time slots, rooms, room capacity, and max session runs
 		System.out.print("How many time slots? ");
 		int timeSlots = input.nextInt();
 		
@@ -40,26 +42,17 @@ public class Main {
 		System.out.println("What is the maximum number of times one session can run? ");
 		int maxRunsPerSession = input.nextInt();
 		
-
 		
-	public static int findLargestSessionID(ArrayList <Session> sessions) {
-		int largest = 0;
+		//calls the load students/sessions/instructors methods to actually store info from the student and session files
+		ArrayList<Student> students = Student.loadStudents(studentFile);
+		ArrayList<Session> sessions = Session.loadSessions(sessionFile);
+		ArrayList<Instructor> instructors = Instructor.loadInstructors(sessions);
 		
-		for (int i = 0; i < sessions.size(); i++) {	
-			if (sessions.get(i) > largest) {
-				largest = sessions.get(i);
-			}
-		}
-		
-		return largest;
-	}
-		
-	public static int[] countSessionRequests(ArrayList<Student> students, int largestSessionID) {
-		int[] counts = new int[largestSessionID + 1];
-			
-		for (Student student : students) {
-			int [] choices = students.ge(ChoicesArray();
-				
+		//creates a schedule object that stores in user-inputted info read from the Main class
+			//it also stores in the info gained from Main class calls to methods from other classes
+		Schedule schedule = new Schedule(timeSlots, rooms, roomCapacity, maxRunsPerSession, students, sessions, instructors);
+	
+	
 			for (int i = 0; i < choices.length; i++) {
 				int sid = choices[i];
 					

@@ -58,9 +58,11 @@ public class Student {
 			String line = scan.nextLine();
 			String[] data = line.split(",");
 			
+			//starts the email and name with an empty string that will later be updated
 			String email = "";
 			String name = "";
 			
+			//makes sure the email/name columns are within the data bounds and then stores the email/name info from the column
 			if (emailColumn < data.length) {
 				email = data[emailColumn];
 			}
@@ -68,7 +70,8 @@ public class Student {
 			if (nameColumn < data.length) {
 				name = data[nameColumn];
 			}
-		
+			
+			//initializing values for the following loop
 			int[] choices = new int[choiceCount];
 			boolean hasChoice = false;
 				
@@ -91,14 +94,16 @@ public class Student {
 				}
 			}
 		
-			//add the student if have a name, email, or at least one ranked choice in the CSV file
+			//add the student if they have a name, email, or at least one ranked choice in the CSV file
 			if (!name.equals("") || !email.equals("") || hasChoice) {
 				int studentId = students.size() + 1;
 				
+				//adds a new student object to the students ArrayList
 				students.add(new Student(studentId, name, email, choices));
 			}
 		}
 		
+		//ends the scanning loop and returns the student AerrayList
 		scan.close();
 		return students;
 	} 
@@ -108,14 +113,15 @@ public class Student {
 	 * it will return 1 for the first choice, 2 for the second choice, and on and on
 	 * it returns 0  if the session was not one chosen by the students
 	 */
-	 
 	 public int getChoiceRank (int sessionId) {
 		for (int i = 0; i < choices.length; i++) {
+			
 			//if the choice matches the session ID being looked for, and 1 to give the choice its proper ranking
 			if (choices[i] == sessionId) {
 				return i + 1;
 			}
 		}
+		
 		//returns 0 if the session is not found in the student's choices
 		return 0;
 	}
@@ -127,7 +133,7 @@ public class Student {
 		return choiceCount;
 	}
 	
-	//getters for all the student info
+	//getters to return all the student info
 	public int getId() {
 		return id;
 	}
@@ -144,7 +150,11 @@ public class Student {
 		return choices;
 	}
 	
+	/*
+	 * a toString method that converts all info into a String format that can be called and printed
+	 */
 	public String toString() {
-		return (id + " " + "(" + email + ")" + " " + name + ": " + choices[0] + ", " + choices[1] + ", " + choices[2] + ", " + choices[3] + ", " + choices[4]);
+		return (id + " " + "(" + email + ")" + " " + name + ": " + choices[0] + ", " + 
+				choices[1] + ", " + choices[2] + ", " + choices[3] + ", " + choices[4]);
 	}
 }
