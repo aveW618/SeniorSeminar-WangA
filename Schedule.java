@@ -117,7 +117,7 @@ public class Schedule {
 		//place each session once first
 		for (int i = 0; i < sessions.size(); i++) {
 			//calls the method that places one session 
-			//actual parameter is the obtained session number
+			//actual parameter includes the obtained session number
 			if (placeOneSession(sessions.get(i), 1)) {
 				placed++;
 			}
@@ -127,7 +127,21 @@ public class Schedule {
 		
 		//add extra runs (of the session) if there is still space in the schedule
 		while (placed < totalSpaces) {
-		
+			//loops through the sessions to see if there are popular sessions and count how many times they run
+			for (int i = 0; i < sessions.size(); i++) {
+				Session session = sessions.get(i);
+				int currentRuns = countRuns(session.getId());
+				//only add another run if the session already runs and has not reached the max number of runs
+				if (currentRuns > 0 && currentRuns < maxRunsPerSession) {
+					//place the sesion into an open slot in the schedule
+					if (placeOneSession(session, currentRuns, placed)) {
+						placed++;
+						added = true;
+					}
+				}
+			}
+		}
+	}
 		
 	/*
 	 * this method tries to place one session in the schedule
