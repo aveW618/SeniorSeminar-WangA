@@ -323,6 +323,29 @@ public class Schedule {
 	}
 	
 	/*
+	 * this method prints the session schedule as a grid
+	 * each row is a time slot and each column is a room
+	 * also includes how many people are enrolled in each room out of the capacity
+	 */
+	public void printSessionGrid() {
+		System.out.println("========== Session Grid ==========");
+
+		System.out.printf("            ", "Time Slot");
+		//loops through and prints out the rooms (user-friendly spacing/design)
+		for (int room = 0; room < rooms; room++) {
+			System.out.printf("               ", "Room " + (room + 1));
+		}
+
+		System.out.println();
+		//loops through and prints out the time slots (even spacing)
+		for (int time = 0; time < timeSlots; time++) {
+			System.out.printf("            ", "Slot " + (time + 1));
+
+			for (int room = 0; room < rooms; room++) {
+				Session session = sessionGrid[time][room];
+				
+				
+	/*
 	 * this method counts how many student assignments were made
 	 */
 	private int countAssignments() {
