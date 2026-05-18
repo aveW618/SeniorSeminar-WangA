@@ -55,10 +55,33 @@ public class Schedule {
 		studentChoiceRanks = new int[students.size()][timeSlots];
 		
 		//loops through all the students and time slots and sets the position in the studdent Rooms array to -1
-		//the -1 means the student has not been assigned to a room yet
+		//the -1 means the student has not been assigned to a room ye
 		for (int s = 0; s < students.size(); s++) {
 			for (int t = 0; t < timeSlots; t++) {
-				studentsRoom[s][t] = -1;
+				studentRoom[s][t] = -1;
+			}
+		}
+	}
+	
+	/*
+	 * a method which counts how popular each session is (based on ranking)
+	 * first choices get more points than later choices
+	 */
+	private void countPopularity() {
+		for (int s = 0; s < students.size(); s++) {
+			//gets the student choices and stores them in the choices array
+			Student student = students.get(s);
+			int[] choices = student.getChoices();
+			
+			//loops through the sessions
+			for (int c = 0; c < choices.length; c++) {
+				Session session = Session.findSession(sessions, choices[c]);
+				
+				//tallies up the point values for student choices
+				if (session != null) {
+					int points = Student.getChoiceCount() - c;
+					session.addRequest(points);
+				}
 			}
 		}
 	}
