@@ -35,13 +35,25 @@ public class Instructor {
 	/*
 	 * this method creates a list of instructors from the session list
 	 * if the same instructor teaches multiple sessions, those session IDs are then grouped together
+	 * also gets instructor information to add using the accessor methods
 	 */
-	public static ArrayList<String> loadInstructorName(ArrayList<Session> sessions) {
+	public static ArrayList<String> loadInstructors(ArrayList<Session> sessions) {
 		ArrayList<Instructor> instructors = new ArrayList<Instructor>();
 		
 		for (int i = 0; i < sessions.size(); i++) {
 			Session session = sessions.get(i);
-			Instructor instructor = findInstructor(instructors, session.getPresenter());
+			Instructor instructor = findInstructor(instructors, session.getInstructor());
+			
+			if (instructor == null) {
+				instructor = new Instructor(session.getInstructor());
+				instructors.add(instructor);
+			}
+
+			instructor.addSessionId(session.getId());
+		}
+
+		return instructors;
+	}
 
 	/*
 	 * this method finds an instructor by name
@@ -56,52 +68,4 @@ public class Instructor {
 		
 		return null;
 	}
-	
-		}
-		scan.close();
-		return instructorName;
-	}
-	
-	public static ArrayList<Integer> loadInstructorSID(String sessionIDFile) throws IOException {
-		ArrayList<Integer> instructorSID = new ArrayList<>();
-		
-		File myFile = new File(sessionIDFile);
-		Scanner scan = new Scanner(myFile);
-		
-		if (scan.hasNextLine()) {
-			scan.nextLine();
-		}
-
-		//read through data and build an Instructor object for each row
-		while (scan.hasNextLine()) {
-			String line = scan.nextLine();
-			String[] data = line.split(",");
-			int sid = Integer.parseInt(data[2]);
-			
-			instructorSID.add(sid);
-		}
-		scan.close();
-		return instructorSID;
-	}
-
-	//main method to test if the loadInstructors method works
-	public static void main(String[] args) throws IOException {
-		//calls the loadInstructors method and inputs senior seminar data
-		ArrayList<String> instructorName = loadInstructorName("Senior Seminar Data.csv");
-		ArrayList<Integer> instructorSID = loadInstructorSID("Senior Seminar Session ID.csv");
-		
-		//prints out the Instructor objects to make sure the program runs as intented: load instructors
-		for(int i = 0; i < instructorName.size(); i++) {
-			System.out.println(instructorName.get(i));
-		}
-		
-		for(int i = 0; i < instructorSID.size(); i++) {
-			System.out.println(instructorSID.get(i));
-		}
-		
-		//prints out the number of instructors successfully loaded
-		System.out.println("Total Instructors loaded: " + instructorName.size());
-			
-	}
-}
 	
