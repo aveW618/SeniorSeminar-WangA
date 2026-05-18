@@ -265,3 +265,36 @@ public class Schedule {
 			if (session != null) {
 				boolean hasSpace = enrollments[time][room] < roomCapacity;
 		 
+
+	/*
+	 * this method checks if a student already has a specific session in their schedule
+	 * it prevents students from repeating the same session
+	 */
+	private boolean studentAlreadyHasSession(int studentIndex, int sessionId) {
+		for (int time = 0; time < timeSlots; time++) {
+			//if the student schedule at a mentioned time isn't empty and the session ID of that time in the schedule
+			//matches the session ID being checked, then return true
+			if (studentSchedules[studentIndex][time] != null && studentSchedules[studentIndex][time].getId() == sessionId) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	/*
+	 * this method counts how many student assignments were made
+	 */
+	private int countAssignments() {
+		int count = 0;
+		//loops through the schedule, if the spot isn't empty, increment the counter by 1
+		for (int s = 0; s < students.size(); s++) {
+			for (int time = 0; time < timeSlots; time++) {
+				if (studentSchedules[s][time] != null) {
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
