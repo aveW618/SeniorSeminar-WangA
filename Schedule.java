@@ -218,7 +218,6 @@ public class Schedule {
 				for (int s = 0; s < students.size(); s++) {
 					//only assigns the student if they do not already have a session for the time specified
 					if (studentSchedules[s][time] == null) {
-						int wantedSessionId = students.get(s).getChoices();
 						int room = findOpenRoom(time, wantedSessionId, s);
 						//if there is an open room, assign the student to that session
 						if (room != -1) {
@@ -343,7 +342,61 @@ public class Schedule {
 
 			for (int room = 0; room < rooms; room++) {
 				Session session = sessionGrid[time][room];
+				//displays empty if the session is not running/filled
+				if (session == null) {
+					System.out.printf("               ", "Empty");
+				} 
+				//otherwise, displays the session number in its correct cell
+				else {
+					String cell = "S" + session.getId() + " (" + enrollments[time][room] + "/" + roomCapacity + ")";
+					System.out.printf("               ", cell);
+				}
+			}
+
+			System.out.println();
+		}
+
+		System.out.println();
+		System.out.println("S# means session ID. The number in parentheses is enrolled students / room capacity.");
+	}
 				
+	/*
+	* this method prints each speaker's schedule 
+	* each speaker is listed with their room assignment and corresponding session name for each time slot
+	*/
+	public void printSpeakerSchedule() {
+		System.out.println("========== Speaker Schedule ==========");
+		//loops through the instructors, getting their info
+		for (int i = 0; i < instructors.size(); i++) {
+			Instructor instructor = instructors.get(i);
+
+			System.out.println(instructor.getName() + ":");
+			
+			//loops through the time slots and rooms
+			for (int time = 0; time < timeSlots; time++) {
+				boolean foundSession = false;
+
+				for (int room = 0; room < rooms; room++) {
+					Session session = sessionGrid[time][room];
+					//if the session's corresponding instructor info matches the instructor currently being looped through
+						//print out the time slot, room, and session info
+					if (session != null && session.getInstructor().equalsIgnoreCase(instructor.getName())) {
+						System.out.println("\tTime Slot #" + (time + 1) + ": Room " + (room + 1) + ", " + session.getName());
+						foundSession = true;
+					}
+				}
+				
+				//if a session is not found to match the info being looped through
+				//display that the instructor has no session at that specific time slot
+				if (!foundSession) {
+					System.out.println("\tTime Slot #" + (time + 1) + ": No session");
+				}
+			}
+
+			System.out.println();
+		}
+	}
+	
 				
 	/*
 	 * this method counts how many student assignments were made
