@@ -109,16 +109,16 @@ public class Schedule {
 	 * this method places sessions into the room and time slot grid
 	 * each session is placed once first, and popular sessions may run again
 	 */
-	public void placeSessions() {
+	private void placeSessions() {
 		//initial guidelines
-		int totalSpaces = timeSlots + rooms;
+		int totalSpaces = timeSlots * rooms;
 		int placed = 0;
 
 		//place each session once first
-		for (int i = 0; i < sessions.size(); i++) {
+		for (int i = 0; i < sessions.size() && placed < totalSpaces; i++) {
 			//calls the method that places one session 
 			//actual parameter includes the obtained session number
-			if (placeOneSession(sessions.get(i), 1)) {
+			if (placeOneSession(sessions.get(i), 1, placed)) {
 				placed++;
 			}
 		}
@@ -126,15 +126,16 @@ public class Schedule {
 		boolean added = true;
 		
 		//add extra runs (of the session) if there is still space in the schedule
-		while (placed < totalSpaces) {
+		while (placed < totalSpaces && added) {
+			added = false;
 			//loops through the sessions to see if there are popular sessions and count how many times they run
-			for (int i = 0; i < sessions.size(); i++) {
+			for (int i = 0; i < sessions.size() && placed < totalSpaces; i++) {
 				Session session = sessions.get(i);
 				int currentRuns = countRuns(session.getId());
 				//only add another run if the session already runs and has not reached the max number of runs
 				if (currentRuns > 0 && currentRuns < maxRunsPerSession) {
 					//place the sesion into an open slot in the schedule
-					if (placeOneSession(session, currentRuns, placed)) {
+					if (placeOneSession(session, currentRuns + 1, placed)) {
 						placed++;
 						added = true;
 					}
@@ -198,7 +199,7 @@ public class Schedule {
 		//loops through the schedule (room and times) to find where sessions are placed (if so, increment counter by 1)
 		for (int time = 0; time < timeSlots; time++) {
 			for (int room = 0; room < rooms; room++) {
-				if (sessionGrid[time][room] != null) {
+				if (sessionGrid[time][room] != null && sessionGrid[time][room].getId() == sessionId) {
 					count++;
 				}
 			}
@@ -211,13 +212,14 @@ public class Schedule {
 	 * a method which assigns students to sessions
 	 * it goes through ranked choices first, then assigns students to open sessions if needed
 	 */
-	 public void assignStudents() {
+	 private void assignStudents() {
 		 //loops through each time slot and choice ranking
 		 for (int time = 0; time < timeSlots; time++) {
 			for (int choiceRank = 1; choiceRank < Student.getChoiceCount(); choiceRank++) {
 				for (int s = 0; s < students.size(); s++) {
 					//only assigns the student if they do not already have a session for the time specified
 					if (studentSchedules[s][time] == null) {
+						int wantedSessionId = students.get(s).getChoices()[choiceRank - 1];
 						int room = findOpenRoom(time, wantedSessionId, s);
 						//if there is an open room, assign the student to that session
 						if (room != -1) {
@@ -230,6 +232,7 @@ public class Schedule {
 					}
 				}
 			}
+			
 			
 			
 	/*
