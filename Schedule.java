@@ -397,6 +397,33 @@ public class Schedule {
 		}
 	}
 	
+	/*
+	 * this method prints each student's schedule as a simple list
+	 * each student has one line for each session they should attend
+	 */
+	public void printStudentLists() {
+		System.out.println("========== Student Schedules ==========");
+
+		for (int s = 0; s < students.size(); s++) {
+			System.out.println(students.get(s).getName() + ":");
+
+			for (int time = 0; time < timeSlots; time++) {
+				Session session = studentSchedules[s][time];
+				
+				//prints out info for the users if no session is found
+				if (session == null) {
+					System.out.println("\tSession " + (time + 1) + ": No session found");
+				} 
+				//otherwise prints out the session and room info corresponding for each student
+				else {
+					System.out.println("\tSession " + (time + 1) + ": Room " + (studentRooms[s][time] + 1) + ", " + session.getName());
+				}
+			}
+
+			System.out.println();
+		}
+	}
+	
 				
 	/*
 	 * this method counts how many student assignments were made
