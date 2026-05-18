@@ -231,4 +231,37 @@ public class Schedule {
 					}
 				}
 			}
+			
+			
+	/*
+	 * this method finds an open room for a specific session during a time slot
+	 */
+	public int findOpenRoom(int time, int sessionId, int studentIndex) {
+		for (int room = 0; room < rooms; room++) {
+			Session session = sessionGrid[time][room];
+			
+			//if the session is not empty and also not completely full, then return the room 
+			if (session != null) {
+				if (enrollments[time][room] < roomCapacity) {
+					return room;
+				}
+			}
+		}
+
+		return -1;
+	}
+	
+	/*
+	 * this method finds the least crowded room during a time slot
+	 * it is used when a student cannot get one of their choices
+	 */
+	 private int findLeastCrowdedRoom(int time, int studentIndex) {
+		int bestRoom = -1;
+
+		for (int room = 0; room < rooms; room++) {
+			Session session = sessionGrid[time][room];
+			
+			//if the session isn't null, checks to see if it has space
+			if (session != null) {
+				boolean hasSpace = enrollments[time][room] < roomCapacity;
 		 
