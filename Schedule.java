@@ -302,6 +302,27 @@ public class Schedule {
 	}
 	
 	/*
+	 * a method which prints a summary of the final schedule
+	 * it includes total conflicts and average conflicts per student, sessions and students loaded, etc.
+	 */
+	public void printSummary() {
+		int totalConflicts = countConflicts();
+		int conflictsPerStudent = 0;
+
+		if (students.size() > 0) {
+			conflictsPerStudent = (double) totalConflicts / students.size();
+		}
+
+		System.out.println("========== Schedule Summary ==========");
+		System.out.printf("                         " +  "%d /n", "Students loaded:", students.size());
+		System.out.printf("                         " +  "%d /n", "Sessions loaded:", sessions.size());
+		System.out.printf("                         " +  "%d /n", "Instructors loaded:", instructors.size());
+		System.out.printf("                         " +  "%d /n", "Assignments made:", countAssignments());
+		System.out.printf("                         " +  "%d /n", "Total conflicts:", totalConflicts);
+		System.out.printf("                         " +  "%d /n", "Conflicts per student:", conflictsPerStudent);
+	}
+	
+	/*
 	 * this method counts how many student assignments were made
 	 */
 	private int countAssignments() {
