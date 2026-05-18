@@ -13,7 +13,7 @@ public class Schedule {
 	private int timeSlots;
 	private int rooms;
 	private int roomCapacity;
-	private final int maxSessionRuns;
+	private int maxRunsPerSession;
 	
 	//declaring arrayLists that store student, session, and instructor info for later usage
 	private ArrayList<Student> students;
@@ -35,7 +35,7 @@ public class Schedule {
 	 * it stores the schedule guidlines, students, sessions, and instructors
 	 */
 	public Schedule(int timeSlots, int rooms, int roomCapacity, int maxRunsPerSession, ArrayList<Student> students, 
-					ArrayList<Session> sessions, <Instructor> instructors) {
+					ArrayList<Session> sessions, ArrayList<Instructor> instructors) {
 		this.timeSlots = timeSlots;
 		this.rooms = rooms;
 		this.roomCapacity = roomCapacity;
@@ -59,7 +59,7 @@ public class Schedule {
 		//the -1 means the student has not been assigned to a room ye
 		for (int s = 0; s < students.size(); s++) {
 			for (int t = 0; t < timeSlots; t++) {
-				studentRoom[s][t] = -1;
+				studentRooms[s][t] = -1;
 			}
 		}
 	}
@@ -95,7 +95,7 @@ public class Schedule {
 		for (int i = 0; i < sessions.size() - 1; i++) {
 			for (int j = i + 1; j < sessions.size(); j++) {
 				//ranks the sessions from greatest to least (max value is found)
-				if (sessions.get(j).getPoints() > sessions.get(i).getPoints()) {
+				if (sessions.get(j).getPopularityPoints() > sessions.get(i).getPopularityPoints()) {
 					//uses a temporary value to swap the max value
 					Session temp = sessions.get(i);
 					sessions.set(i, sessions.get(j));
@@ -146,7 +146,7 @@ public class Schedule {
 		
 	/*
 	 * this method tries to place one session in the schedule
-	 * it also avoids putting the same presenter in two rooms at the same time
+	 * it also avoids putting the same instructor in two rooms at the same time
 	 */
 	private boolean placeOneSession(Session session, int runNumber, int startingSlot) {
 		for (int f = 0; f < timeSlots; f++) {
@@ -171,7 +171,7 @@ public class Schedule {
 	
 	/*
 	 * this method checks whether a session can be placed in one time slot
-	 * it prevents the same session and same presenter from appearing twice in that time slot
+	 * it prevents the same session and same instructor from appearing twice in that time slot
 	 */
 	private boolean canPlaceInTimeSlot(Session session, int time) {
 		//loops through all rooms to see if any have already been assigned
@@ -233,18 +233,33 @@ public class Schedule {
 				}
 			}
 			
+			//assign students with no ranked choice available
+			for (int s = 0; s < students.size(); s++) {
+				if (studentSchedules[s][time] == null) {
+					int room = findLeastCrowdedRoom(time, s);
+
+					if (room != -1) {
+						studentSchedules[s][time] = sessionGrid[time][room];
+						studentRooms[s][time] = room;
+						studentChoiceRanks[s][time] = 0;
+						enrollments[time][room]++;
+					}
+				}
+			}
+		}
+	}
 			
 			
 	/*
 	 * this method finds an open room for a specific session during a time slot
 	 */
-	public int findOpenRoom(int time, int sessionId, int studentIndex) {
+	private int findOpenRoom(int time, int sessionId, int studentIndex) {
 		for (int room = 0; room < rooms; room++) {
 			Session session = sessionGrid[time][room];
 			
 			//if the session is not empty and also not completely full, then return the room 
-			if (session != null) {
-				if (enrollments[time][room] < roomCapacity) {
+			if (session != null && session.getId() == sessionId) {
+				if (enrollments[time][room] < roomCapacity && !studentAlreadyHasSession(studentIndex, sessionId)) {
 					return room;
 				}
 			}
@@ -269,7 +284,6 @@ public class Schedule {
 			
 			//if the session isn't null, checks to see if it has space
 			if (session != null) {
-				boolean hasSpace = enrollments[time][room] < roomCapacity;
 				boolean hasSpace = enrollments[time][room] < roomCapacity;
 				//calls a method to see if a student already has a session
 				boolean alreadyHasSession = studentAlreadyHasSession(studentIndex, session.getId());
@@ -309,7 +323,7 @@ public class Schedule {
 	 */
 	public void printSummary() {
 		int totalConflicts = countConflicts();
-		int conflictsPerStudent = 0;
+		double conflictsPerStudent = 0.0;
 
 		if (students.size() > 0) {
 			conflictsPerStudent = (double) totalConflicts / students.size();
