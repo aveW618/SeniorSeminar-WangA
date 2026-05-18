@@ -254,6 +254,10 @@ public class Schedule {
 	/*
 	 * this method finds the least crowded room during a time slot
 	 * it is used when a student cannot get one of their choices
+	 * I struggled a bit here with thinking of what other methods I might need to combine
+	 * together to actually be able to find the least crowded room
+	 * This was also another layer of complexity which I might not need but would be 
+	 * helpful in determing which room specifically to assign students
 	 */
 	 private int findLeastCrowdedRoom(int time, int studentIndex) {
 		int bestRoom = -1;
@@ -264,6 +268,21 @@ public class Schedule {
 			//if the session isn't null, checks to see if it has space
 			if (session != null) {
 				boolean hasSpace = enrollments[time][room] < roomCapacity;
+				boolean hasSpace = enrollments[time][room] < roomCapacity;
+				//calls a method to see if a student already has a session
+				boolean alreadyHasSession = studentAlreadyHasSession(studentIndex, session.getId());
+				//if there is an empty space in the room, or the enrollment number is less than the enrollment
+				//of the current best room, set the best room as this new room
+				if (hasSpace && !alreadyHasSession) {
+					if (bestRoom == -1 || enrollments[time][room] < enrollments[time][bestRoom]) {
+						bestRoom = room;
+					}
+				}
+			}
+		}
+
+		return bestRoom;
+	}
 		 
 
 	/*
@@ -298,3 +317,18 @@ public class Schedule {
 
 		return count;
 	}
+	
+	/*
+	 * this method counts how many total conflicts there are
+	 */
+	private int countConflicts() {
+		int count = 0;
+		
+		//loops through all the students and adds together their conflicts
+		for (int s = 0; s < students.size(); s++) {
+			count += countConflictsForStudent(s);
+		}
+
+		return count;
+	}
+}
